@@ -41,7 +41,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DES
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "4")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_RESOLVER       "$(ECMC_EC_SLAVE_NUM)")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7211"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7211, SUBST_FILE=../db/ecmcResolver.substitutions"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -57,7 +57,7 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_OUTPUTS},BO_4,1)"
 ## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
-#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
+$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
 
 ##############################################################################
 ############# Configure diagnostics:
