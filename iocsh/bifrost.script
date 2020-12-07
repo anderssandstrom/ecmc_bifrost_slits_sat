@@ -8,32 +8,38 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg develop
+require ecmccfg 6.3.0
 
 # Epics Motor record driver that will be used:
 epicsEnvShow(ECMC_MR_MODULE)
 
 # run module startup.cmd (only needed at ESS  PSI auto call at require)
-$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.0, EC_RATE=500"
+$(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3.0, EC_RATE=1000"
 
 ##############################################################################
 ## Configure hardware:
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "7")
-epicsEnvSet("ECMC_EC_SLAVE_NUM_INPUTS",       ${ECMC_EC_SLAVE_NUM})
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK1808"
+#0  0:0  PREOP  +  EK1100 EtherCAT-Koppler (2A E-Bus)
+#1  0:1  PREOP  +  EL7037 1K. Schrittmotor-Endstufe (24V, 1.5A)
+#2  0:2  PREOP  +  EL1808 8K. Dig. Eingang 24V, 3ms
+#3  0:3  PREOP  +  EL2808 8K. Dig. Ausgang 24V, 0.5A
+#4  0:4  PREOP  +  EL7211 1K. MDP742 Servo-Motor-Endstufe (50V, 4,5A RMS)
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "9")
-epicsEnvSet("ECMC_EC_SLAVE_NUM_OUTPUTS",      ${ECMC_EC_SLAVE_NUM})
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EK8808"
-
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "27")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",         ${ECMC_EC_SLAVE_NUM})
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037"
 
-epicsEnvSet("ECMC_EC_SLAVE_NUM",              "42")
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "2")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_INPUTS",       ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL1808"
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "3")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_OUTPUTS",      ${ECMC_EC_SLAVE_NUM})
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL2808"
+
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "4")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_RESOLVER       "$(ECMC_EC_SLAVE_NUM)")
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7201"
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7211"
 
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
@@ -49,7 +55,7 @@ ecmcConfigOrDie "Cfg.WriteEcEntryIDString(${ECMC_EC_SLAVE_NUM_OUTPUTS},BO_4,1)"
 ## AXIS 1
 #
 epicsEnvSet("DEV",      "$(IOC)")
-$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/ipos8020_1.ax)
+#$(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
 
 ##############################################################################
 ############# Configure diagnostics:
@@ -57,8 +63,8 @@ $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/ipos8020_1.ax)
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
 ecmcConfigOrDie "Cfg.EcEnablePrintouts(0)"
 ecmcConfigOrDie "Cfg.EcSetDomainFailedCyclesLimit(100)"
-ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
-ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisIndex(1)"
+#ecmcConfigOrDie "Cfg.SetDiagAxisFreq(2)"
 ecmcConfigOrDie "Cfg.SetDiagAxisEnable(0)"
 
 # go active

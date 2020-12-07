@@ -18,3 +18,20 @@
 ## Motor
 Motor and PT100 in same connector (7pin lemo)
 
+Need to make own cable since no standard 7pin cable available:
+
+
+```
+A+ brown
+A- white
+B+ greeń
+B- yellow
+
+PT100+ gray
+PT100- pink
+
+
+```
+
+
+
