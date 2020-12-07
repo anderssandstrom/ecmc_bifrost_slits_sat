@@ -8,7 +8,7 @@ epicsEnvSet("IOC" ,"$(IOC="IOC_TEST")")
 epicsEnvSet("ECMCCFG_INIT" ,"")  #Only run startup once (auto at PSI, need call at ESS), variable set to "#" in startup.cmd
 epicsEnvSet("SCRIPTEXEC" ,"$(SCRIPTEXEC="iocshLoad")")
 
-require ecmccfg 6.3.0
+require ecmccfg develop
 
 # Epics Motor record driver that will be used:
 epicsEnvShow(ECMC_MR_MODULE)
@@ -25,9 +25,11 @@ $(ECMCCFG_INIT)$(SCRIPTEXEC) ${ecmccfg_DIR}startup.cmd, "IOC=$(IOC),ECMC_VER=6.3
 #3  0:3  PREOP  +  EL2808 8K. Dig. Ausgang 24V, 0.5A
 #4  0:4  PREOP  +  EL7211 1K. MDP742 Servo-Motor-Endstufe (50V, 4,5A RMS)
 
+system("ethercat slaves")
+
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",         ${ECMC_EC_SLAVE_NUM})
-${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037"
+${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037, CONFIG=-Motor-AML-D42.3-1.8"
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "2")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_INPUTS",       ${ECMC_EC_SLAVE_NUM})
