@@ -1,0 +1,17 @@
+file "ecmcEcSlave.template"
+{
+  pattern {}
+          {}
+}
+
+# EL7201 resolver 
+# epicsEnvSet("ECMC_ENC_SCALE_NUM"          "360")
+# epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "1048576")
+# => scale=0.00034332275390625
+file "ecmcEL72XX_ENC.template"
+{
+  pattern {LINR,    ESLO,                     EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
+          {"SLOPE", 0.00034332275390625,      0,      "Raw",      0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+}
+
+
