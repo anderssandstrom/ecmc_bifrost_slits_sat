@@ -60,6 +60,20 @@ epicsEnvSet("DEV",      "$(IOC)")
 $(SCRIPTEXEC) ($(ecmccfg_DIR)configureAxis.cmd, CONFIG=./cfg/linear_1.ax)
 
 ##############################################################################
+## Load plugin: FFT Resolver
+require ecmc_plugin_fft master
+epicsEnvSet(ECMC_FFT_ID,   0)
+epicsEnvSet(ECMC_FFT_NELM, 1024)
+epicsEnvSet("ECMC_FFT_RATE", 100)
+
+ecmcEpicsEnvSetCalc("ECMC_FFT_SCALE", "1.0/1048576.0","%1.9lf")
+epicsEnvSet(ECMC_PLUGIN_FILNAME,"${HOME}/epics/base-7.0.4/require/3.3.0/siteMods/ecmc_plugin_fft/master/lib/${EPICS_HOST_ARCH=linux-x86_64}/libecmc_plugin_fft.so")
+epicsEnvSet(ECMC_PLUGIN_CONFIG,"SOURCE=ec0.s4.POSITION;RM_LIN=1;DBG_PRINT=0;NFFT=${ECMC_FFT_NELM};RATE=${ECMC_FFT_RATE};RM_DC=1;SCALE=${ECMC_FFT_SCALE=1};MODE=CONT;ENABLE=1;")
+${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=${ECMC_FFT_ID},FILE=${ECMC_PLUGIN_FILNAME},CONFIG='${ECMC_PLUGIN_CONFIG}', REPORT=0"
+# Note: INDEX is the index of FFT object in FFT plugin and not PLUGIN_ID. In this case the same
+dbLoadRecords(ecmcPluginFFT.template,"P=$(IOC):,INDEX=${ECMC_FFT_ID}, NELM=${ECMC_FFT_NELM}, ,AMP_DESC='Position amplitude',AMP_EGU='mm',RAW_DESC='Position',RAW_EGU='mm',TITLE='FFT for resolver position'")
+
+##############################################################################
 ############# Configure diagnostics:
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
