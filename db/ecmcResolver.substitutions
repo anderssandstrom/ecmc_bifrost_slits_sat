@@ -4,14 +4,14 @@ file "ecmcEcSlave.template"
           {}
 }
 
-# EL7201 resolver 
-# epicsEnvSet("ECMC_ENC_SCALE_NUM"          "360")
+# EL7201 resolver 1mm per rev
+# epicsEnvSet("ECMC_ENC_SCALE_NUM"          "1")
 # epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "1048576")
 # => scale=0.00034332275390625
 file "ecmcEL72XX_ENC.template"
 {
   pattern {LINR,    ESLO,                     EOFF,   EGU,        PREC, LOW, LOLO, HIGH, HIHI, HYST, LLSV,       LSV,        HSV,        HHSV      }
-          {"SLOPE", 0.00034332275390625,      0,      "Raw",      0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
+          {"SLOPE", 9.5367431640625e-07,      0,      "Raw",      0,    0,   0,    0,    0,    0,    "NO_ALARM", "NO_ALARM", "NO_ALARM", "NO_ALARM"}
 }
 
 
