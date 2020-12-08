@@ -13,7 +13,7 @@ epicsEnvSet("ECMC_MOD_TYPE",              "0")                        # For posi
 epicsEnvSet("ECMC_ENC_SCALE_NUM"          "360")
 epicsEnvSet("ECMC_ENC_SCALE_DENOM"        "12800")
 epicsEnvSet("ECMC_ENC_TYPE"               "0")                        # Type: 0=Incremental, 1=Absolute
-epicsEnvSet("ECMC_ENC_BITS"               "32")                       # Total bit count of encoder raw data
+epicsEnvSet("ECMC_ENC_BITS"               "16")                       # Total bit count of encoder raw data
 epicsEnvSet("ECMC_ENC_ABS_BITS",          "0")                        # Absolute bit count (for absolute encoders) always least significant part of ECMC_ENC_BITS
 epicsEnvSet("ECMC_ENC_ABS_OFFSET"         "0")                        # Encoder offset in eng units (for absolute encoders)
 epicsEnvSet("ECMC_EC_ENC_ACTPOS",         "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).POSITION")  # Ethercat entry for actual position input (encoder)
@@ -29,9 +29,6 @@ epicsEnvSet("ECMC_EC_DRV_REDUCE_TORQUE",  "ec0.s$(ECMC_EC_SLAVE_NUM_DRIVE).STM_C
 epicsEnvSet("ECMC_EC_DRV_BRAKE",          "")                                                   # Ethercat entry for brake output
 epicsEnvSet("ECMC_DRV_BRAKE_OPEN_DLY_TIME",    "0")                                             # Brake timing parameter in cycles (default 1kHz)
 epicsEnvSet("ECMC_DRV_BRAKE_CLOSE_AHEAD_TIME", "0")                                             # Brake timing parameter in cycles (default 1kHz)
-
-
-
 
 #Trajectory
 epicsEnvSet("ECMC_VELO",                  "100.0")
