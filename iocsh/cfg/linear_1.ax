@@ -69,7 +69,7 @@ epicsEnvSet("ECMC_MON_LAG_MON_TIME",      "100")
 epicsEnvSet("ECMC_MON_LAG_MON_ENA",       "1")
 
 # At target
-epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.1")
+epicsEnvSet("ECMC_MON_AT_TARGET_TOL",     "0.05")
 epicsEnvSet("ECMC_MON_AT_TARGET_TIME",     "100")
 epicsEnvSet("ECMC_MON_AT_TARGET_ENA",     "1")
 
