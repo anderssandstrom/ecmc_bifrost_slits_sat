@@ -10,9 +10,11 @@
 
 ## Switches
 
-* Axis 1 and Axis 2 have correct wired switches.
+Axis 1 and Axis 2 have correct wired switches.
 
 ## Resolver
+
+Pins are offset one step resulting in that the resolver cannot be read.
 
 
 ## Motor
@@ -30,8 +32,15 @@ B- yellow
 PT100+ gray
 PT100- pink
 
-
 ```
 
 
+# Motion
+
+## Stroke Axis 1
+The stroke was measured to be 69.4mm
+
+The limit switches are positioned VERY close to mechanical stop (especially the upper). This could be an issue.
+
+![Almost collision](tests/11360/11360_limit_close_to_mech.png)
 
