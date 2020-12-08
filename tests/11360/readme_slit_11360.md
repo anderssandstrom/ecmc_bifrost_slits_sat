@@ -34,7 +34,6 @@ PT100- pink
 
 ```
 
-
 # Motion
 
 ## Stroke Axis 1
@@ -43,3 +42,8 @@ The stroke was measured to be 69.4mm
 The limit switches are positioned VERY close to mechanical stop (especially the upper). This could be an issue.
 
 ![Almost collision](tests/11360/11360_limit_close_to_mech.png)
+
+
+# Stroke Axis 2
+
+
