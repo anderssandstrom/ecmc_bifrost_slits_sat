@@ -145,7 +145,9 @@ cat axis1_switch_highlim.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMo
 * Tests at 20 40 60
 * Reset dail to 0 at pos 20
 
-![setup](tests/11358/axis1/dail_setup_11358_axis1.png)
+![setup](../../tests/11358/axis1/dail_setup_11358_axis1.png)
+
+
 
 #### Position 20
 Reset dail to 0 at pos 20
