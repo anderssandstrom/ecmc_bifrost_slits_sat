@@ -123,10 +123,16 @@ Works fine!
 
 ## Switch repeatability
 
-### Low Lim
-
+### Low Lim (10 repeats)
 ```
-camonitor IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s2-EL1808-BI1  | tee axis1_switch_lowlim.log
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s2-EL1808-BI1  | tee axis1_switch_lowlim.log
+cat axis1_switch_lowlim.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py 
+```
+
+### High Lim (10 repeats)
+```
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s2-EL1808-BI2  | tee axis1_switch_highlim.log
+cat axis1_switch_highlim.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py 
 ```
 
 
