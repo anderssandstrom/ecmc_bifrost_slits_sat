@@ -143,6 +143,9 @@ cat axis1_switch_highlim.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMo
 * 10 times from one directions to same target and read the two feedbacks.\
 * Homing first at low limit (sequence 1)
 * Tests at 20 40 60
+* Reset dail to 0 at pos 20
+
+![setup](tests/11358/axis1/dail_setup_11358_axis1.png)
 
 #### Position 20
 Reset dail to 0 at pos 20
@@ -206,6 +209,7 @@ Test | Pos60| Pos59.5|
 10 | 39.8885  | 39.4110
 
 ### Repeatability from top (moving from top)
+ Same coord dail zero as previous test
 
 #### Position 20
 Reset dail to 0 at pos 20
@@ -269,7 +273,6 @@ Test | Pos60| Pos60.5|
 8  | 39.8730 | 40.3645
 9  | 39.8725 | 40.3640
 10 | 39.8715 | 40.3640
-
 
 
 # Axis 2
