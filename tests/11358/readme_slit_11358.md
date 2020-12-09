@@ -207,6 +207,49 @@ Test | Pos60| Pos59.5|
 
 ### Repeatability from top (moving from top)
 
+#### Position 20
+Reset dail to 0 at pos 20
+```
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos20_above.log
+cat axis1_repeat_pos20_above.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
+
+```
+
+Test | Pos20| Pos20.5| 
+--- | --- | --- |
+1  | -0.0620 | 0.4270
+2  | -0.0625 | 0.4265
+3  | -0.0625 | 0.4265
+4  | -0.0630 | 0.4265
+5  | -0.0630 | 0.4265
+6  | -0.0630 | 0.4265
+7  | -0.0630 | 0.4260
+8  | -0.0630 | 0.4260
+9  | -0.0630 | 0.4260
+10 | -0.0625 | 0.4250
+
+#### Position 40
+Reset dail to 0 at pos 20
+```
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos40_above.log
+cat axis1_repeat_pos40_above.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
+
+```
+
+Test | Pos40| Pos40.5| 
+--- | --- | --- |
+1  | 19.8970 | 20.3895
+2  | 19.8970 | 20.3890
+3  | 19.8970 | 20.3890
+4  | 19.8965 | 20.3890
+5  | 19.8960 | 20.3885
+6  | 19.8960 | 20.3885
+7  | 19.8960 | 20.3880
+8  | 19.8960 | 20.3885
+9  | 19.8955 | 20.3880
+10 | 19.8955 | 20.3890
+
+### Position 60
 Reset dail to 0 at pos 20
 ```
 camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos60_above.log
@@ -214,34 +257,18 @@ cat axis1_repeat_pos60_above.log | python ~/projects/ecmccomgui/pyDataManip/plot
 
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-###
-
-
-
-
-
-
+Test | Pos60| Pos60.5| 
+--- | --- | --- |
+1  | 39.8755 | 40.3685
+2  | 39.8750 | 40.3670
+3  | 39.8745 | 40.3670
+4  | 39.8740 | 40.3660
+5  | 39.8740 | 40.3665
+6  | 39.8735 | 40.3655
+7  | 39.8730 | 40.3650
+8  | 39.8730 | 40.3645
+9  | 39.8725 | 40.3640
+10 | 39.8715 | 40.3640
 
 
 
