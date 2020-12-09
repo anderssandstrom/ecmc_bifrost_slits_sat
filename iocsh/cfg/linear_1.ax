@@ -40,10 +40,10 @@ epicsEnvSet("ECMC_EMERG_DECEL",           "${ECMC_ACCL}")             # Emergenc
 #Homing
 epicsEnvSet("ECMC_HOME_PROC",             "1")
 epicsEnvSet("ECMC_HOME_POS",              "0.0")
-epicsEnvSet("ECMC_HOME_VEL_TO",           "100")
-epicsEnvSet("ECMC_HOME_VEL_FRM",          "20")
-epicsEnvSet("ECMC_HOME_ACC",              "100")
-epicsEnvSet("ECMC_HOME_DEC",              "100")
+epicsEnvSet("ECMC_HOME_VEL_TO",           "0.5")
+epicsEnvSet("ECMC_HOME_VEL_FRM",          "0.25")
+epicsEnvSet("ECMC_HOME_ACC",              "1")
+epicsEnvSet("ECMC_HOME_DEC",              "1")
 
 #Controller
 epicsEnvSet("ECMC_CNTRL_KP",              "5.0")

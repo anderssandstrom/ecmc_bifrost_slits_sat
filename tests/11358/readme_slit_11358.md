@@ -138,6 +138,60 @@ camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TE
 cat axis1_switch_highlim.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py 
 ```
 
+### Repeatability from below (moving from below)
+
+* 10 times from one directions to same target and read the two feedbacks.\
+* Homing first at low limit (sequence 1)
+* Tests at 20 40 60
+
+#### Position 20
+Reset dail to 0 at pos 20
+```
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos20.log
+
+```
+Test | Pos20| Pos19.5| 
+--- | --- | --- |
+1  |  0.0010 | -0.4760
+2  |  0.0010 | -0.4765
+3  |  0.0015 | -0.4770
+4  |  0.0020 | -0.4780
+5  |  0.005  | -0.4785
+6  |  -0.001 | -0.4790
+7  |  0.000  | -0.4795
+8  |  0.0015 | -0.4800
+9  |  0.005  | -0.4805
+10 |  -0.001 | -0.4815
+
+
+#### Position 40
+Reset dail to 0 at pos 20
+```
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos40.log
+
+```
+Test | Pos20| Pos19.5| 
+--- | --- | --- |
+1  |  0.0010 | -0.4760
+2  |  0.0010 | -0.4765
+3  |  0.0015 | -0.4770
+4  |  0.0020 | -0.4780
+5  |  0.005  | -0.4785
+6  |  -0.001 | -0.4790
+7  |  0.000  | -0.4795
+8  |  0.0015 | -0.4800
+9  |  0.005  | -0.4805
+10 |  -0.001 | -0.4815
+
+
+###
+
+
+
+
+
+
+
 
 
 # Axis 2
