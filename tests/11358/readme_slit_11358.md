@@ -148,6 +148,7 @@ cat axis1_switch_highlim.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMo
 Reset dail to 0 at pos 20
 ```
 camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos20.log
+cat axis1_repeat_pos20.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
 
 ```
 Test | Pos20| Pos19.5| 
@@ -168,20 +169,70 @@ Test | Pos20| Pos19.5|
 Reset dail to 0 at pos 20
 ```
 camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos40.log
+cat axis1_repeat_pos40.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
 
 ```
-Test | Pos20| Pos19.5| 
+Test | Pos40| Pos39.5| 
 --- | --- | --- |
-1  |  0.0010 | -0.4760
-2  |  0.0010 | -0.4765
-3  |  0.0015 | -0.4770
-4  |  0.0020 | -0.4780
-5  |  0.005  | -0.4785
-6  |  -0.001 | -0.4790
-7  |  0.000  | -0.4795
-8  |  0.0015 | -0.4800
-9  |  0.005  | -0.4805
-10 |  -0.001 | -0.4815
+1  | 19.9485  | 19.4675
+2  | 19.9475  | 19.4660
+3  | 19.9470  | 19.4655
+4  | 19.9470  | 19.4650
+5  | 19.9465  | 19.4630
+6  | 19.9465  | 19.4620
+7  | 19.9455  | 19.4615
+8  | 19.9445  | 19.4615
+9  | 19.9440  | 19.4605
+10 | 19.9430  | 19.4585
+
+#### Position 60
+Reset dail to 0 at pos 20
+```
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos60.log
+cat axis1_repeat_pos60.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
+
+```
+Test | Pos60| Pos59.5| 
+--- | --- | --- |
+1  | 39.8950  | 39.4175
+2  | 39.8940  | 39.7160
+3  | 39.8925  | 39.4160
+4  | 39.8920  | 39.4155
+5  | 39.8915  | 39.4150
+6  | 39.8910  | 39.4145
+7  | 39.8905  | 39.4130
+8  | 39.8895  | 39.4120
+9  | 39.8890  | 39.4115
+10 | 39.8885  | 39.4110
+
+### Repeatability from top (moving from top)
+
+Reset dail to 0 at pos 20
+```
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos60_above.log
+cat axis1_repeat_pos60_above.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ###
