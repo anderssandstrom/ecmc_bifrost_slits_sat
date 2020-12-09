@@ -26,6 +26,7 @@ camonitor IOC_TEST:ec0-s4-EL7211-Enc-PosAct | tee axis1_resolver_standstill.log
 
 ### Resolver at different angles 
 
+
 Starts at Angle x+0:
 ```
 angle=0
@@ -124,12 +125,14 @@ Works fine!
 ## Switch repeatability
 
 ### Low Lim (10 repeats)
+Velocity 0.25 I think..
 ```
 camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s2-EL1808-BI1  | tee axis1_switch_lowlim.log
 cat axis1_switch_lowlim.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py 
 ```
 
 ### High Lim (10 repeats)
+Velocity 0.25 I think..
 ```
 camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s2-EL1808-BI2  | tee axis1_switch_highlim.log
 cat axis1_switch_highlim.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py 
