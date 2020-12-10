@@ -8,55 +8,42 @@ import math
 import unittest
 import ecmcSlitDemoLib
 
-testNumberBase=30
+testNumberBase=10
 homedPvSuffix='-homed'
-testLoops = 10
+
 
 if len(sys.argv)!=6:
-  print("python ecmcTestRepeatability.py <motorPvNamepv> <testnumberpv> <from> <to> <velo>")
-  print("python ecmcTestRepeatability.py IOC:Axis1 IOC:TestNumber 0 100 25")
+  print("python ecmcTestResolver.py <motorPvNamepv> <testnumberpv> <stepsize> <steps> <velo>")
+  print("python ecmcTestResolver.py IOC:Axis1 IOC:TestNumber 0.125 8 0.25")
   sys.exit()
 
 
 motorPvName = sys.argv[1]
 testPvname  = sys.argv[2]
 motorHomedPvName = motorPvName + homedPvSuffix
-fromPos = float(sys.argv[3])
-toPos = float(sys.argv[4])
+stepSize = float(sys.argv[3])
+steps = float(sys.argv[4])
 velo  = float(sys.argv[5]) 
 homedPv = epics.PV(motorHomedPvName)
 testPv = epics.PV(testPvname)
 
-if homedPv is None:
-   print ("Invalid homed pv") 
-   sys.exit()
+#if homedPv is None:
+#   print ("Invalid homed pv") 
+#   sys.exit()
 
 if testPv is None:
    print ("Invalid testPv") 
    sys.exit()
    
 homed = homedPv.get()
-if not homed:
-   print ("Motor not homed. Test will abort.")
-   sys.exit()
-
-maxPos = toPos
-if fromPos > maxPos:
-  maxPos = fromPos
-
-minPos = fromPos
-if toPos < minPos:
-  minPos = toPos
+#if not homed:
+#   print ("Motor not homed. Test will abort.")
+#   sys.exit()
 
 testPv.put(testNumberBase)
-
+startPos = ecmcSlitDemoLib.getActPos(motorPvName)
 hepp = input('Start data acquisition now. Push enter when ready.\n')
     
-#Disable softLimits
-print( 'Set softlimits')
-ecmcSlitDemoLib.setSoftLowLimt(motorPvName, minPos -10)
-ecmcSlitDemoLib.setSoftHighLimt(motorPvName, maxPos +10)
-
 print ('Disable amplifier')
 ecmcSlitDemoLib.setAxisEnable(motorPvName, 0)
 time.sleep(1) #ensure that enabled goes down
@@ -74,23 +61,16 @@ time.sleep(1) #ensure that enabled goes down
 error=ecmcSlitDemoLib.getAxisError(motorPvName,1)
 counter = 0
 
-timeOut = (maxPos-minPos)/velo*1.5
+timeOut = 2
 
-while counter < testLoops:
+while counter < steps:
   #run gap and center motorPvName to 0
-  
-  print ('Move axis to position ' + str(fromPos) + ' (cycles = ' + str(counter) + ').')
-  done=ecmcSlitDemoLib.moveAxisPosition(motorPvName,fromPos,velo,timeOut)
+  counter = counter + 1
+  print ('Move axis to position ' + str(startPos+counter*stepSize) + ' (cycles = ' + str(counter) + ').')
+  done=ecmcSlitDemoLib.moveAxisPosition(motorPvName,startPos+counter*stepSize,velo,timeOut)
   if not done:
     print (motorPvName + " failed to position.")
     sys.exit()
-
-  print ('Move axis to position ' + str(toPos) + ' (cycles = ' + str(counter) + ').')
-  done=ecmcSlitDemoLib.moveAxisPosition(motorPvName,toPos,velo,timeOut)
-  if not done:
-    print( motorPvName + " failed to position.")
-    sys.exit()
-  counter = counter +1
   time.sleep(1)
   testPv.put(testNumberBase+counter)
 
