@@ -43,6 +43,10 @@ epicsEnvSet("ECMC_EC_SLAVE_NUM",              "4")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_RESOLVER       "$(ECMC_EC_SLAVE_NUM)")
 ${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7211, SUBST_FILE=../db/ecmcResolver.substitutions"
 
+epicsEnvSet("ECMC_EC_SLAVE_NUM",              "5")
+epicsEnvSet("ECMC_EC_SLAVE_NUM_TRIANGULAR     "$(ECMC_EC_SLAVE_NUM)")
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=OptoILD2300_50mm"
+
 #Apply hardware configuration
 ecmcConfigOrDie "Cfg.EcApplyConfig(1)"
 
