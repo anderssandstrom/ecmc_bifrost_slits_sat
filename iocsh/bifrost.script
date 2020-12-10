@@ -78,6 +78,10 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}loadPlugin.cmd, "PLUGIN_ID=${ECMC_FFT_ID},FILE=${ECM
 dbLoadRecords(ecmcPluginFFT.template,"P=$(IOC):,INDEX=${ECMC_FFT_ID}, NELM=${ECMC_FFT_NELM}, ,AMP_DESC='Position amplitude',AMP_EGU='mm',RAW_DESC='Position',RAW_EGU='mm',TITLE='FFT for resolver position'")
 
 ##############################################################################
+############# Load Test Admin Records:
+dbLoadRecords(../db/ecmcTestAdmin.db,"P=$(IOC):")
+
+##############################################################################
 ############# Configure diagnostics:
 
 ecmcConfigOrDie "Cfg.EcSetDiagnostics(1)"
