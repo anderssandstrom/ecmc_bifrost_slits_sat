@@ -277,6 +277,32 @@ Test | Pos60| Pos60.5|
 10 | 39.8715 | 40.3640
 
 
+## Test with micro epsilon sensor
+Absolute sensor with 50mm rannge
+
+NOTE: positive value from top (so needs to be neagated to be compared to other values)
+### Position 15 from below
+```
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct | tee axis1_repeat_pos15_below_me.log
+cat  axis1_repeat_pos15_below_me.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
+```
+
+Test | Pos15| Pos14.5| 
+--- | --- | --- |
+1  | 45.840 | 46.367
+2  | 45.840 | 46.364
+3  | 45.839 | 46.367
+4  | 45.838 | 46.367
+5  | 45.839 | 46.367
+6  | 45.839 | 46.367
+7  | 45.838 | 46.369
+8  | 45.839 | 46.369
+9  | 45.839 | 46.368
+10 | 45.839 | 46.367
+
+Conclusion: Lets switch to optical sensor! 
+
+
 # Axis 2
 
 
