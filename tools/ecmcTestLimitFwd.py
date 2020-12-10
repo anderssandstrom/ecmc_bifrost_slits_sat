@@ -87,7 +87,7 @@ startPos = ecmcSlitDemoLib.getActPos(motorPvName)-stepSize  # Now in the limit
 print ('Move axis to position startposition just before switch: ' + str(startPos))
 done=ecmcSlitDemoLib.moveAxisPosition(motorPvName,startPos,velo,timeOut)
 
-while counter < testLoops*2:
+while counter < testLoops:
   print ('Engage switch' + str(startPos+stepSize) + ' (cycles = ' + str(counter) + ').')
   done=ecmcSlitDemoLib.moveAxisPosition(motorPvName,startPos+stepSize,velo,timeOut)
   if not done:
@@ -102,9 +102,9 @@ while counter < testLoops*2:
   if not done:
     print (motorPvName + " failed to position.")
     sys.exit()
-  counter = counter + 1
+
   time.sleep(1)
-  testPv.put(testNumberBase+counter)
+  testPv.put(testNumberBase+testLoops)
 
 time.sleep(1)
 testPv.put(testNumberBase)
