@@ -33,6 +33,10 @@ if homedPv is None:
 if testPv is None:
    print ("Invalid testPv") 
 
+if not homedPv.get():
+   print ("Motor not homed. Test will abort.")
+
+
 maxPos = toPos
 if fromPos > maxPos:
   maxPos = fromPos
@@ -41,11 +45,10 @@ minPos = fromPos
 if toPos < minPos:
   minPos = toPos
 
-if not homedPv.get():
-   print ("Motor not homed. Test will abort.")
-
 testPv.put(testNumberBase)
 
+hepp = input('Start data acquisition now. Push enter when ready.\n')
+    
 #Disable softLimits
 print( 'Set softlimits')
 ecmcSlitDemoLib.setSoftLowLimt(motorPvName, minPos -10)
@@ -87,5 +90,8 @@ while counter < testLoops:
   counter = counter +1
   time.sleep(1)
   testPv.put(testNumberBase+counter)
-  
+
+time.sleep(1)
+testPv.put(testNumberBase)
+
 print("Test done!")
