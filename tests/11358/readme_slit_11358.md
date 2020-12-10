@@ -303,6 +303,14 @@ Test | Pos15| Pos14.5|
 Conclusion: Lets switch to optical sensor! 
 
 
-# Axis 2
 
+# Start over with automized tests
+Micro epsilon senspr will allow completely automized data acquisition
 
+Repeatability test:
+
+```
+python ecmcTestRepeatability.py IOC_TEST:Axis1 IOC_TEST:TestNumber 14.5 15 0.5
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber | tee axis1_repeat_pos15_below_auto.log
+cat  axis1_repeat_pos15_below_auto.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
+```
