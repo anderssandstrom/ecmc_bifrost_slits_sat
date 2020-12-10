@@ -8,7 +8,7 @@ import math
 import unittest
 import ecmcSlitDemoLib
 
-testNumberBase=10
+testNumberBase=1000
 homedPvSuffix='-homed'
 
 

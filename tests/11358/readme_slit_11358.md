@@ -307,21 +307,47 @@ Conclusion: Lets switch to optical sensor!
 Micro epsilon senspr will allow completely automized data acquisition
 
 ## 1 Resolver Test
-
+Testbase 1000 (hardcoded)
 ```
 python ecmcTestResolver.py IOC_TEST:Axis1 IOC_TEST:TestNumber 0.125 8 0.5
 camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber | tee axis1_resolver.log
 cat axis1_resolver.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
-
 ```
 ## 2 Limit accuarcy
+Testbase 2000
 
+### 2.1 Forward accuracy
+Micro epsilon not used
+Testbase 2100 (hardcoded)
+```
+python ecmcTestLimitFwd.py IOC_TEST:Axis1 IOC_TEST:TestNumber 1 0.5
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber IOC_TEST:ec0-s2-EL1808-BI1 IOC_TEST:ec0-s2-EL1808-BI2 IOC_TEST:ec0-s2-EL1808-BI2 | tee axis1_limitfwd.log
+cat axis1_limitfwd.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
+```
+
+### 2.1 Reverse accuracy
+Micro epsilon not used
+Testbase 2200 (hardcoded)
+
+```
+python ecmcTestLimitBwd.py IOC_TEST:Axis1 IOC_TEST:TestNumber 1 0.5
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber IOC_TEST:ec0-s2-EL1808-BI1 IOC_TEST:ec0-s2-EL1808-BI2 IOC_TEST:ec0-s2-EL1808-BI2 | tee axis1_limitbwd.log
+cat axis1_limitbwd.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
+```
 
 ## 3 Repeatability test:
 
+## From below (positive)
+Testbase 3100
 ```
-python ecmcTestRepeatability.py IOC_TEST:Axis1 IOC_TEST:TestNumber 14.5 15 0.5
-camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber | tee axis1_repeat_pos15_below_auto.log
-cat axis1_repeat_pos15_below_auto.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
-
+python ecmcTestRepeatability.py IOC_TEST:Axis1 IOC_TEST:TestNumber 14.5 15 0.5 3100
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber | tee axis1_repeat_pos15_below.log
+cat axis1_repeat_pos15_below.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
+```
+## From above (positive)
+Testbase 3200
+```
+python ecmcTestRepeatability.py IOC_TEST:Axis1 IOC_TEST:TestNumber 15.5 15 0.5 3200
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber | tee axis1_repeat_pos15_above.log
+cat axis1_repeat_pos15_above.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
 ```

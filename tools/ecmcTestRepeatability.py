@@ -8,13 +8,12 @@ import math
 import unittest
 import ecmcSlitDemoLib
 
-testNumberBase=30
 homedPvSuffix='-homed'
 testLoops = 10
 
-if len(sys.argv)!=6:
-  print("python ecmcTestRepeatability.py <motorPvNamepv> <testnumberpv> <from> <to> <velo>")
-  print("python ecmcTestRepeatability.py IOC:Axis1 IOC:TestNumber 0 100 25")
+if len(sys.argv)!=7:
+  print("python ecmcTestRepeatability.py <motorPvNamepv> <testnumberpv> <from> <to> <velo> <testbasenum>")
+  print("python ecmcTestRepeatability.py IOC:Axis1 IOC:TestNumber 0 100 25 3100")
   sys.exit()
 
 
@@ -24,6 +23,7 @@ motorHomedPvName = motorPvName + homedPvSuffix
 fromPos = float(sys.argv[3])
 toPos = float(sys.argv[4])
 velo  = float(sys.argv[5]) 
+testNumberBase = float(sys.argv[6]) 
 homedPv = epics.PV(motorHomedPvName)
 testPv = epics.PV(testPvname)
 

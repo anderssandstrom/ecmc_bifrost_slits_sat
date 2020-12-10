@@ -135,7 +135,7 @@ def setSoftLowLimt(motor,limt):
 
 ####################################################################################
 def moveAxisVelocity(motor,velocity, timeout = 0):
-  epics.caput(motor + '.JVEL',velocity)
+  epics.caput(motor + '.JVEL',abs(velocity))
   if velocity==0:
     print("moveAxisVelocity: Velocity must be !=0.")
   if velocity>0:

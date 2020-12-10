@@ -9,15 +9,15 @@ import math
 import unittest
 import ecmcSlitDemoLib
 
-testNumberBase=2100
+testNumberBase=2200
 homedPvSuffix='-homed'
-limitPvSuffix='-limitfwd'
+limitPvSuffix='-limitbwd'
 
 testLoops = 10
 
 if len(sys.argv)!=5:
-  print("python ecmcTestLimitFwd.py.py <motorPvNamepv> <testnumberpv> <stepsize> <velo>")
-  print("python ecmcTestLimitFwd.py.py IOC:Axis1 IOC:TestNumber 1 0.5")
+  print("python ecmcTestLimitBwd.py.py <motorPvNamepv> <testnumberpv> <stepsize> <velo>")
+  print("python ecmcTestLimitBwd.py.py IOC:Axis1 IOC:TestNumber 1 0.5")
   sys.exit()
 
 
@@ -63,9 +63,8 @@ time.sleep(1) #ensure that enabled goes down
 error=ecmcSlitDemoLib.getAxisError(motorPvName,1)
 counter = 0
 
-
 print ('Move to switch')
-error=ecmcSlitDemoLib.moveAxisVelocity(motorPvName,velo)
+error=ecmcSlitDemoLib.moveAxisVelocity(motorPvName,-velo,0)
 
 timeout = 50
 polltime=1
@@ -82,14 +81,15 @@ while wait_for_done > 0:
           print ('Timeout! Did not reach switch..')
           sys.exit()
 
-timeOut = 5
-startPos = ecmcSlitDemoLib.getActPos(motorPvName)-stepSize  # Now in the limit
+print ('Now at switch')
+timeOut = 10
+startPos = ecmcSlitDemoLib.getActPos(motorPvName)+stepSize  # Now in the limit
 print ('Move axis to position startposition just before switch: ' + str(startPos))
 done=ecmcSlitDemoLib.moveAxisPosition(motorPvName,startPos,velo,timeOut)
 
 while counter < testLoops*2:
-  print ('Engage switch' + str(startPos+stepSize) + ' (cycles = ' + str(counter) + ').')
-  done=ecmcSlitDemoLib.moveAxisPosition(motorPvName,startPos+stepSize,velo,timeOut)
+  print ('Engage switch' + str(startPos-stepSize) + ' (cycles = ' + str(counter) + ').')
+  done=ecmcSlitDemoLib.moveAxisPosition(motorPvName,startPos-stepSize,velo,timeOut)
   if not done:
     print (motorPvName + " failed to position.")
     sys.exit()
