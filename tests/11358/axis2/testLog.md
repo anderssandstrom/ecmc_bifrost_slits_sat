@@ -12,6 +12,8 @@
 5. Upper limit switch lever looks like it has been bent. 
 
 ### Electrical
+Check electrical connections.
+
 Test | Check| Verified| 
 --- | --- | --- |
 1  | Motor phase A resistance | OK
@@ -25,9 +27,11 @@ Test | Check| Verified|
 
 ## First test run
 
-1. Small scratching sound
+1. Small scratching/grinding sound
 2. Limits very close to mech stops. Readjusted to getr some more margin
 3. Use Velocity of 0.75mm/s for tests
+4. Use same current as JJXRay
+5. Some small more distcicat sounds.
 
 ## 1 Resolver Test
 Micro epsilon not used
