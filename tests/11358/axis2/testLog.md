@@ -69,7 +69,7 @@ python ecmcTestRepeatability.py IOC_TEST:Axis1 IOC_TEST:TestNumber 15.5 15 0.5 3
 
 ## Data logging:
 ```
-camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber IOC_TEST:ec0-s2-EL1808-BI1 IOC_TEST:ec0-s2-EL1808-BI2 IOC_TEST:ec0-s2-EL1808-BI2 IOC_TEST:Axis1-PosSet | tee axis2_data.log
+camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber IOC_TEST:ec0-s2-EL1808-BI1 IOC_TEST:ec0-s2-EL1808-BI2 IOC_TEST:Axis1-PosSet | tee axis2_data.log
 
 cat axisx_data.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
 ```
