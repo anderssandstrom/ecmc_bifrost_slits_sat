@@ -30,11 +30,6 @@ echo "DATACOUNT = ${DATACOUNT}"
 # IOC_TEST:Axis1-PosAct          2020-12-11 12:47:59.380804 10.00078125  
 # IOC_TEST:TestNumber 2020-12-11 12:57:31.157767 4008
 
-#cat ${FILE} | grep '${TESTPV}\|${DATAPV}'
-# Trim spaces: awk '{$1=$1;print}'
-#DATA=$(cat ${FILE} | grep '${TESTPV}|${DATAPV}' | awk '{$1=$1;print}' |  grep -B${DATACOUNT} '^${TESTPV}*.${TESTNUM}')
-DATA=$(cat ${FILE} | grep "${TESTPV}\|${DATAPV}" | awk '{$1=$1;print}' | grep -B${DATACOUNT} "^${TESTPV}.* ${TESTNUM}$")
-
+#                       rm last line  get data column
+DATA=$(bash ecmcGetLinesBeforeTest.bash ${FILE} ${TESTPV} ${TESTNUM} ${DATAPV} ${DATACOUNT} |  awk '{print $NF}')
 echo "${DATA}"
-
-# ^>.*</li>$
