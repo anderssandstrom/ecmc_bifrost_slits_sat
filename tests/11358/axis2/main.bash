@@ -13,7 +13,9 @@
 # IOC_TEST:ec0-s4-EL7211-Enc-PosAct 2020-12-11 12:45:50.390806 -12.14605904  
 # IOC_TEST:Axis1-PosSet          2020-12-11 12:45:50.390806 0.053556875  
 # IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 2020-12-11 12:47:59.400804 50.498368  
-#
+# IOC_TEST:ec0-s2-EL1808-BI1     2020-12-11 12:44:37.040810 1  
+# IOC_TEST:ec0-s2-EL1808-BI2     2020-12-11 12:11:08.720807 1  
+
 
 if [ "$#" -ne 2 ]; then
    echo "main: Wrong arg count... Please specify input and output file."
@@ -91,7 +93,7 @@ bash ecmcReportInit.bash $REPORT $FILE
 
 ## Write sensor information
 bash ecmcReport.bash $REPORT "# Sensors"
-bash ecmcReport.bash $REPORT "Test were performed with two position feedback systems:"
+bash ecmcReport.bash $REPORT "Test were performed with three position feedback systems:"
 bash ecmcReport.bash $REPORT ""
 bash ecmcReport.bash $REPORT "1: Open loop counter of stepper (used for control)"
 bash ecmcReport.bash $REPORT "2: Resolver (included in the slitsets)"
@@ -116,5 +118,34 @@ bash ecmcReport.bash $REPORT "1. Scale factor  : -1 (measure from top)"
 bash ecmcReport.bash $REPORT "2. Offset factor : ${OPTO_OFFSET}mm"
 bash ecmcReport.bash $REPORT ""
 
+############ LOW LIMIT SWITCH
 # Check Low limit switch accuracy
+# IOC_TEST:Axis1-PosAct          s2020-12-11 12:47:59.380804 10.00078125  
+# IOC_TEST:TestNumber 2020-12-11 12:57:31.157767 4008
+# IOC_TEST:ec0-s4-EL7211-Enc-PosAct 2020-12-11 12:45:50.390806 -12.14605904  
+# IOC_TEST:Axis1-PosSet          2020-12-11 12:45:50.390806 0.053556875  
+# IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 2020-12-11 12:47:59.400804 50.498368  
+# IOC_TEST:ec0-s2-EL1808-BI1     2020-12-11 12:44:37.040810 1  
+# IOC_TEST:ec0-s2-EL1808-BI2     2020-12-11 12:11:08.720807 1  
 
+# Get one openloop counter value just before BI1 0
+TRIGGPV="IOC_TEST:TestNumber"
+TRIGGVAL="2001"
+DATAPV="IOC_TEST:Axis1-PosAct"
+DATACOUNT="250"
+SWITCHPV="IOC_TEST:ec0-s2-EL1808-BI"
+SWITCHVAL=0
+
+# Engage
+for TRIGGVAL in {2001..2010}
+do
+   OPENLOOPVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
+   echo "Switch engage position $TRIGGVAL: $OPENLOOPVAL"
+done
+# Disengage
+SWITCHVAL=1
+for TRIGGVAL in {2011..2020}
+do
+   OPENLOOPVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
+   echo "Switch disengage position $TRIGGVAL: $OPENLOOPVAL"
+done

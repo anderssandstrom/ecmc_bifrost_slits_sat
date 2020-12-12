@@ -1,11 +1,11 @@
 # ecmc motion system test report
 
 * Data file   : axis2_data.log
-* Date        : Sat Dec 12 22:45:35 CET 2020
+* Date        : Sun Dec 13 00:00:01 CET 2020
 * Author      : anderssandstrom
 
 # Sensors
-Test were performed with two position feedback systems:
+Test were performed with three position feedback systems:
 
 1: Open loop counter of stepper (used for control)
 2: Resolver (included in the slitsets)
@@ -22,8 +22,8 @@ Conversion data (to open loop coord syst):
 
 ## External verification system
 A Micro-Epsilon ILD2300 sensor is used as external verification system:
-all_data.png axis2_data.log ecmcAvgData.bash ecmcAvgLines.bash ecmcGetDataBeforeTrigg.bash ecmcGetLinesBeforeTrigg.bash ecmcOffsetData.bash ecmcOffsetLines.bash ecmcReport.bash ecmcReportInit.bash ecmcScaleData.bash ecmcScaleLines.bash ecmcScaleOffsetData.bash ecmcScaleOffsetLines.bash ecmcSwitchJitter.bash main.bash report.md testLog.md Type : Laser triangulation
-all_data.png axis2_data.log ecmcAvgData.bash ecmcAvgLines.bash ecmcGetDataBeforeTrigg.bash ecmcGetLinesBeforeTrigg.bash ecmcOffsetData.bash ecmcOffsetLines.bash ecmcReport.bash ecmcReportInit.bash ecmcScaleData.bash ecmcScaleLines.bash ecmcScaleOffsetData.bash ecmcScaleOffsetLines.bash ecmcSwitchJitter.bash main.bash report.md testLog.md Range : 50mm (mounted to cover the center of the slitset stroke)
+all_data.png axis2_data.log ecmcAvgData.bash ecmcAvgLines.bash ecmcGetDataBeforeTrigg.bash ecmcGetLinesBeforeTrigg.bash ecmcGetSwitchPosValue.bash ecmcOffsetData.bash ecmcOffsetLines.bash ecmcReport.bash ecmcReportInit.bash ecmcScaleData.bash ecmcScaleLines.bash ecmcScaleOffsetData.bash ecmcScaleOffsetLines.bash ecmcSwitchJitter.bash main.bash report.md testLog.md Type : Laser triangulation
+all_data.png axis2_data.log ecmcAvgData.bash ecmcAvgLines.bash ecmcGetDataBeforeTrigg.bash ecmcGetLinesBeforeTrigg.bash ecmcGetSwitchPosValue.bash ecmcOffsetData.bash ecmcOffsetLines.bash ecmcReport.bash ecmcReportInit.bash ecmcScaleData.bash ecmcScaleLines.bash ecmcScaleOffsetData.bash ecmcScaleOffsetLines.bash ecmcSwitchJitter.bash main.bash report.md testLog.md Range : 50mm (mounted to cover the center of the slitset stroke)
 
 Conversion data (to open loop coord syst):
 1. Scale factor : -1 (measure from top)
