@@ -30,6 +30,6 @@ echo "LINECOUNT = ${LINECOUNT}"
 # IOC_TEST:Axis1-PosAct          2020-12-11 12:47:59.380804 10.00078125  
 # IOC_TEST:TestNumber 2020-12-11 12:57:31.157767 4008
 
-#                    grep or                       trim spaces           grep 50 rows before: "TESTPV"*" TESTNUM"        remove last line                        
+#                    grep TESTPV or DATAPV         trim spaces           grep 50 rows before: "TESTPV"*" TESTNUM"        remove last line                        
 DATA=$(cat ${FILE} | grep "${TESTPV}\|${DATAPV}" | awk '{$1=$1;print}' | grep -B${LINECOUNT} "^${TESTPV}.* ${TESTNUM}$" | head -n -1)
 echo "${DATA}"

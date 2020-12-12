@@ -30,6 +30,10 @@ echo "DATACOUNT = ${DATACOUNT}"
 # IOC_TEST:Axis1-PosAct          2020-12-11 12:47:59.380804 10.00078125  
 # IOC_TEST:TestNumber 2020-12-11 12:57:31.157767 4008
 
-#                       rm last line  get data column
+#                                                                                              get data column
 DATA=$(bash ecmcGetLinesBeforeTest.bash ${FILE} ${TESTPV} ${TESTNUM} ${DATAPV} ${DATACOUNT} |  awk '{print $NF}')
+DATA=$(echo "${DATA}")
+
+# Example to offset data in the last column with 100
+# | awk '{$NF+=100; print $0}'
 echo "${DATA}"
