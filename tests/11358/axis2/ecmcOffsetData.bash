@@ -3,7 +3,9 @@
 # Offset data in a camonitor text line
 #
 # Arg 1 Offset value
-
+#
+# Return List of offset data only (without PV name and timestamp).
+#
 # Example:Offset all lines from stdin with 10
 # bash ecmcOffestDataLines.bash 10 
 #
