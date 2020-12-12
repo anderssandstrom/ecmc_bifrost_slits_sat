@@ -1,8 +1,9 @@
 #!/bin/bash
 # 
-# Offset data in a camonitor text line
+# Offset data
 #
-# Arg 1 Offset value
+# Arg 1 Optional file name, otherwise stdin
+# Arg 2 Offset value
 #
 # Return List of offset data only (without PV name and timestamp).
 #
@@ -11,6 +12,7 @@
 #
 # Author: Anders Sandström, anders.sandstrom@esss.se
 #
+
 ARGOK=0
 if [ "$#" -eq 1 ]; then
     FILE="-"

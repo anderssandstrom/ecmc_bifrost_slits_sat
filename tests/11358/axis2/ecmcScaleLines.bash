@@ -2,9 +2,10 @@
 # 
 # Scale data in a camonitor text line
 #
-# Arg 1 Scale value
+# Arg 1 Optional file name, otherwise stdin
+# Arg 2 Scale value
 #
-# Retrun Complete camonitor lines scaled (with PV name and timestamp).
+# Return Complete camonitor lines scaled (with PV name and timestamp).
 #
 # Example:Scale all lines from stdin with 10
 # bash ecmcScaleLines.bash 10 

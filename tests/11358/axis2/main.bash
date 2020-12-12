@@ -39,6 +39,8 @@ echo "####################################################################"
 DATA=$(bash ecmcGetDataBeforeTrigg.bash ${FILE} ${TRIGGPV} ${TRIGGVAL} ${DATAPV} ${DATACOUNT})
 DATA=$(echo "${DATA}" | bash ecmcOffsetData.bash 10.1)
 echo "${DATA}"
+AVG=$(echo "${DATA}" | bash ecmcAvgData.bash)
+echo "AVG= ${AVG}" 
 echo "####################################################################"
 DATA=$(bash ecmcGetLinesBeforeTrigg.bash ${FILE} ${TRIGGPV} ${TRIGGVAL} ${DATAPV} ${DATACOUNT})
 echo "${DATA}"
