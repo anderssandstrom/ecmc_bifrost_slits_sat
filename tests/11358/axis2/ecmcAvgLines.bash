@@ -1,10 +1,10 @@
 #!/bin/bash
 # 
-# Calc average
+# Calc average of camonitor text lines
 #
 # Arg 1 Optional file name, otherwise stdin
 #
-# Return Average value
+# Return Average value.
 #
 # Example: Avg all lines from stdin with 10
 # bash ecmcAvgData.bash
@@ -18,9 +18,9 @@ if [ "$#" -eq 1 ]; then
 fi
 
 if [ "$#" -gt 1 ]; then
-  echo "ecmcAvgData: Wrong arg count..."
+  echo "ecmcAvgLines: Wrong arg count..."
   exit 1  
 fi
 
-AVG=$(cat ${FILE} | awk -v CONVFMT=%.17g '{sum+=$1; print $0} END {print sum/NR}')
+AVG=$(cat ${FILE} | awk -v CONVFMT=%.17g '{sum+=$NF; print $0} END {print sum/NR}')
 echo "${AVG}"

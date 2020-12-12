@@ -45,3 +45,10 @@ echo "####################################################################"
 DATA=$(bash ecmcGetLinesBeforeTrigg.bash ${FILE} ${TRIGGPV} ${TRIGGVAL} ${DATAPV} ${DATACOUNT})
 echo "${DATA}"
 echo "####################################################################"
+
+# Find resolver offset. Reference it approx center of range (repeatabilty test at 35mm, testnumber = 3301..3310)
+TRIGGVAL="3305"
+DATACOUNT="50"
+DATA=$(bash ecmcGetLinesBeforeTrigg.bash ${FILE} ${TRIGGPV} ${TRIGGVAL} ${DATAPV} ${DATACOUNT})
+AVG=$(echo "${DATA}" | bash ecmcAvgLines.bash)
+echo "Resolver Offset = ${AVG}" 
