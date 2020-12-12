@@ -132,7 +132,7 @@ bash ecmcReport.bash $REPORT ""
 TRIGGPV="IOC_TEST:TestNumber"
 TRIGGVAL="2001"
 DATAPV="IOC_TEST:Axis1-PosAct"
-DATACOUNT="350"
+DATACOUNT="350"  # Must be enough to capture the switch transition
 SWITCHPV="IOC_TEST:ec0-s2-EL1808-BI1"
 SWITCHVAL=0
 # Engage
@@ -182,3 +182,5 @@ do
    echo "FWD switch disengage position $TRIGGVAL: $OPENLOOPVAL, $RESOLVERVAL"
 done
 
+
+# Add stddev
