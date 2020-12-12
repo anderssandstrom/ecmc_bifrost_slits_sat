@@ -2,7 +2,8 @@
 # 
 # Main script for processing data for bifrost slitset SAT.
 #
-# Arg 1 File
+# Arg 1 Data file   (input)
+# Arg 2 Report file (output)
 #
 # Author: Anders Sandström, anders.sandstrom@esss.se
 #
@@ -14,12 +15,13 @@
 # IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 2020-12-11 12:47:59.400804 50.498368  
 #
 
-if [ "$#" -ne 1 ]; then
-   echo "main: Wrong arg count..."
+if [ "$#" -ne 2 ]; then
+   echo "main: Wrong arg count... Please specify input and output file."
    exit 1 
 fi
 
 FILE=$1
+REPORT=$2
 TRIGGPV="IOC_TEST:TestNumber"
 TRIGGVAL="1001"
 DATAPV="IOC_TEST:ec0-s4-EL7211-Enc-PosAct"
@@ -46,9 +48,72 @@ DATA=$(bash ecmcGetLinesBeforeTrigg.bash ${FILE} ${TRIGGPV} ${TRIGGVAL} ${DATAPV
 echo "${DATA}"
 echo "####################################################################"
 
-# Find resolver offset. Reference it approx center of range (repeatabilty test at 35mm, testnumber = 3301..3310)
+# Find resolver value at 35mm (on open loop counter).
+TRIGGPV="IOC_TEST:TestNumber"
 TRIGGVAL="3305"
+DATAPV="IOC_TEST:ec0-s4-EL7211-Enc-PosAct"
 DATACOUNT="50"
 DATA=$(bash ecmcGetLinesBeforeTrigg.bash ${FILE} ${TRIGGPV} ${TRIGGVAL} ${DATAPV} ${DATACOUNT})
-AVG=$(echo "${DATA}" | bash ecmcAvgLines.bash)
-echo "Resolver Offset = ${AVG}" 
+RESOLVER_VAL_AT_35=$(echo "${DATA}" | bash ecmcAvgLines.bash)
+echo "Resolver val at 35mm                = ${RESOLVER_VAL_AT_35}"
+
+# Find microepsilon optical sensor value at 35mm (on open loop counter).
+TRIGGPV="IOC_TEST:TestNumber"
+TRIGGVAL="3305"
+DATAPV="IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1"
+DATACOUNT="30"  # Not updating every cycle
+DATA=$(bash ecmcGetLinesBeforeTrigg.bash ${FILE} ${TRIGGPV} ${TRIGGVAL} ${DATAPV} ${DATACOUNT})
+# Need to reverse sign since positive in negative ditrection
+OPTO_VAL_AT_35=$(echo "${DATA}" | bash ecmcScaleLines.bash -1 | bash ecmcAvgLines.bash)
+echo "Opto val at 35mm                    = ${OPTO_VAL_AT_35}"
+
+# Find open loop sensor value at 35mm (on open loop counter) (should be very close 35, just to check!!).
+TRIGGPV="IOC_TEST:TestNumber"
+TRIGGVAL="3305"
+DATAPV="IOC_TEST:Axis1-PosAct"
+DATACOUNT="1" # Just one value since on change and open loop counter is not changing at standstill
+DATA=$(bash ecmcGetLinesBeforeTrigg.bash ${FILE} ${TRIGGPV} ${TRIGGVAL} ${DATAPV} ${DATACOUNT})
+# Need to reverse sign since positive in negative ditrection
+OPEN_LOOP_VAL_AT_35=$(echo "${DATA}" | bash ecmcAvgLines.bash)
+echo "Openloop val at 35mm                = ${OPEN_LOOP_VAL_AT_35}"
+
+echo "This leads to the following offsets to open loop counter:"
+# Calculate offsets for the sensors to get in same coord system (origo at 35mm open loop counter)
+OPTO_OFFSET=$(awk -v sensor=${OPTO_VAL_AT_35} -v ref=${OPEN_LOOP_VAL_AT_35} "BEGIN {print ref-sensor}")
+echo "Opto offset     = ${OPTO_OFFSET}"
+
+# Calculate offsets for the sensors to get in same coord system (origo at 35mm open loop counter)
+RESOLVER_OFFSET=$(awk -v sensor=${RESOLVER_VAL_AT_35} -v ref=${OPEN_LOOP_VAL_AT_35} "BEGIN {print ref-sensor}")
+echo "Resolver offset = ${RESOLVER_OFFSET}"
+
+## Init report file
+bash ecmcReportInit.bash $REPORT $FILE
+
+## Write sensor information
+bash ecmcReport.bash $REPORT "# Sensors"
+bash ecmcReport.bash $REPORT "Test were performed with two position feedback systems:"
+bash ecmcReport.bash $REPORT "1: Open loop counter of stepper (used for control)"
+bash ecmcReport.bash $REPORT "2: Resolver (included in the slitsets)"
+bash ecmcReport.bash $REPORT "3: Laster triangulation sensor (external verification system)"
+bash ecmcReport.bash $REPORT ""
+bash ecmcReport.bash $REPORT "## Open loop counter of stepper"
+bash ecmcReport.bash $REPORT "The stepper motors was run in open loop during all the tests. The openloop step counter, therefore,"
+bash ecmcReport.bash $REPORT "reflect the actual position of the ecmc contolsystem."
+bash ecmcReport.bash $REPORT ""
+bash ecmcReport.bash $REPORT "## Resolver:"
+bash ecmcReport.bash $REPORT "Conversion data (to open loop coord syst)"
+bash ecmcReport.bash $REPORT "1. Scale factor  : 1"
+bash ecmcReport.bash $REPORT "2. Offset factor : ${RESOLVER_OFFSET}mm"
+bash ecmcReport.bash $REPORT ""
+bash ecmcReport.bash $REPORT "## External verification system"
+bash ecmcReport.bash $REPORT "A Micro-Epsilon ILD2300 sensor is used as external verification system:"
+bash ecmcReport.bash $REPORT "* Type          : Laser triangulation"
+bash ecmcReport.bash $REPORT "* Range         : 50mm (mounted to cover the center of the slitset stroke)"
+bash ecmcReport.bash $REPORT ""
+bash ecmcReport.bash $REPORT "Conversion data (to open loop coord syst)"
+bash ecmcReport.bash $REPORT "1. Scale factor  : -1 (measure from top)"
+bash ecmcReport.bash $REPORT "2. Offset factor : ${OPTO_OFFSET}mm"
+bash ecmcReport.bash $REPORT ""
+
+# Check Low limit switch accuracy
+

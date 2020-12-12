@@ -22,5 +22,5 @@ if [ "$#" -gt 1 ]; then
   exit 1  
 fi
 
-AVG=$(cat ${FILE} | awk -v CONVFMT=%.17g '{sum+=$1; print $0} END {print sum/NR}')
+AVG=$(cat ${FILE} | awk -v CONVFMT=%.17g '{sum+=$1} END {print sum/NR}')
 echo "${AVG}"
