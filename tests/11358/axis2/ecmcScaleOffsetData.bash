@@ -8,8 +8,8 @@
 #
 # Return Complete camonitor lines scaled (with PV name and timestamp).
 #
-# Example:Scale all lines from stdin with 10
-# bash ecmcScaleLines.bash 10 
+# Example:Scale and offset all data from stdin with 10, 100
+# bash ecmcScaleOffsetData.bash 10 100
 #
 # Author: Anders Sandström, anders.sandstrom@esss.se
 #

@@ -1,7 +1,7 @@
 # ecmc motion system test report
 
 * Data file   : axis2_data.log
-* Date        : Sun Dec 13 00:00:01 CET 2020
+* Date        : Sun Dec 13 00:15:38 CET 2020
 * Author      : anderssandstrom
 
 # Sensors
