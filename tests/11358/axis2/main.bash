@@ -15,6 +15,13 @@
 # IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 2020-12-11 12:47:59.400804 50.498368  
 # IOC_TEST:ec0-s2-EL1808-BI1     2020-12-11 12:44:37.040810 1  
 # IOC_TEST:ec0-s2-EL1808-BI2     2020-12-11 12:11:08.720807 1  
+#
+# Markdown to PDF notes
+# 1: https://www.markdowntopdf.com
+# 2: 
+# pip install grip  
+# grip your_markdown.md
+# grip will render the markdown on localhost:5000 or similar (ex: go to http://localhost:5000/) - just edit away and refresh the browser. Print when ready.
 
 # Newline
 nl='
@@ -112,8 +119,8 @@ bash ecmcReport.bash $REPORT "2. Offset factor : ${RESOLVER_OFFSET}mm"
 bash ecmcReport.bash $REPORT ""
 bash ecmcReport.bash $REPORT "## External verification system"
 bash ecmcReport.bash $REPORT "Micro-Epsilon ILD2300 sensor:"
-bash ecmcReport.bash $REPORT "* Type          : Laser triangulation"
-bash ecmcReport.bash $REPORT "* Range         : 50mm (mounted to cover the center of the slitset stroke)"
+bash ecmcReport.bash $REPORT "1. Type          : Laser triangulation"
+bash ecmcReport.bash $REPORT "2. Range         : 50mm (mounted to cover the center of the slitset stroke)"
 bash ecmcReport.bash $REPORT ""
 bash ecmcReport.bash $REPORT "Conversion data (to open loop coord syst):"
 bash ecmcReport.bash $REPORT "1. Scale factor  : -1 (measure from top)"
@@ -129,6 +136,23 @@ bash ecmcReport.bash $REPORT ""
 # IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 2020-12-11 12:47:59.400804 50.498368  
 # IOC_TEST:ec0-s2-EL1808-BI1     2020-12-11 12:44:37.040810 1  
 # IOC_TEST:ec0-s2-EL1808-BI2     2020-12-11 12:11:08.720807 1  
+#Test | Openloop [mm]| Resolver [mm]| 
+#--- | --- | --- |
+#1  |  0.0010 | -0.4760
+#2  |  0.0010 | -0.4765
+#3  |  0.0015 | -0.4770
+#4  |  0.0020 | -0.4780
+#5  |  0.005  | -0.4785
+#6  |  -0.001 | -0.4790
+#7  |  0.000  | -0.4795
+#8  |  0.0015 | -0.4800
+#9  |  0.005  | -0.4805
+#10 |  -0.001 | -0.4815
+
+bash ecmcReport.bash $REPORT "# Limit Switch Performance"
+bash ecmcReport.bash $REPORT "## Low Limit Engage Position "
+bash ecmcReport.bash $REPORT "Test | Openloop [mm]| Resolver [mm]|"
+bash ecmcReport.bash $REPORT "--- | --- | --- |"
 
 # Get one openloop counter value just before BI1 0
 TRIGGPV="IOC_TEST:TestNumber"
@@ -139,9 +163,11 @@ SWITCHPV="IOC_TEST:ec0-s2-EL1808-BI1"
 SWITCHVAL=0
 OPENLOOPVALS=""
 RESOLVERVALS=""
+COUNTER=0
 # Engage
 for TRIGGVAL in {2001..2010}
 do
+   let "COUNTER=$COUNTER+1"
    DATAPV="IOC_TEST:Axis1-PosAct"
    OPENLOOPVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
    OPENLOOPVALS+="$OPENLOOPVAL "
@@ -150,6 +176,7 @@ do
    RESOLVERVAL=$(echo $RESOLVERVAL | bash ecmcScaleOffsetData.bash 1 ${RESOLVER_OFFSET})
    RESOLVERVALS+="$RESOLVERVAL "
    echo "BWD switch engage position $TRIGGVAL: $OPENLOOPVAL, $RESOLVERVAL"
+   printf "%d | %.4f | %.4f\n" $COUNTER $OPENLOOPVAL $RESOLVERVAL >> $REPORT
 done
 # Calc avg and std
 OPENLOOPAVG=$(echo "$OPENLOOPVALS" | bash ecmcAvgDataRow.bash)
@@ -158,6 +185,8 @@ echo "Openloop AVG=$OPENLOOPAVG, STD=$OPENLOOPSTD"
 RESOLVERAVG=$(echo "$RESOLVERVALS" | bash ecmcAvgDataRow.bash)
 RESOLVERSTD=$(echo "$RESOLVERVALS" | bash ecmcStdDataRow.bash)
 echo "Resolver AVG=$RESOLVERAVG, STD=$RESOLVERSTD"
+printf "AVG | %.4f | %.4f\n" $OPENLOOPAVG $RESOLVERAVG >> $REPORT
+printf "STD | %.4f | %.4f\n" $OPENLOOPSTD $RESOLVERSTD >> $REPORT
 
 # Disengage
 SWITCHVAL=1
@@ -239,4 +268,5 @@ RESOLVERAVG=$(echo "$RESOLVERVALS" | bash ecmcAvgDataRow.bash)
 RESOLVERSTD=$(echo "$RESOLVERVALS" | bash ecmcStdDataRow.bash)
 echo "Resolver AVG=$RESOLVERAVG, STD=$RESOLVERSTD"
 
-# Add stddev
+############ REPEATABILITY
+
