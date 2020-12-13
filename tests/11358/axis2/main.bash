@@ -16,7 +16,9 @@
 # IOC_TEST:ec0-s2-EL1808-BI1     2020-12-11 12:44:37.040810 1  
 # IOC_TEST:ec0-s2-EL1808-BI2     2020-12-11 12:11:08.720807 1  
 
-
+# Newline
+nl='
+'
 if [ "$#" -ne 2 ]; then
    echo "main: Wrong arg count... Please specify input and output file."
    exit 1 
@@ -92,12 +94,12 @@ echo "Resolver offset = ${RESOLVER_OFFSET}"
 bash ecmcReportInit.bash $REPORT $FILE
 
 ## Write sensor information
-bash ecmcReport.bash $REPORT "# Sensors"
+bash ecmcReport.bash $REPORT "# Sensor calibration"
 bash ecmcReport.bash $REPORT "Test were performed with three position feedback systems:"
 bash ecmcReport.bash $REPORT ""
 bash ecmcReport.bash $REPORT "1: Open loop counter of stepper (used for control)"
 bash ecmcReport.bash $REPORT "2: Resolver (included in the slitsets)"
-bash ecmcReport.bash $REPORT "3: Laster triangulation sensor (external verification system)"
+bash ecmcReport.bash $REPORT "3: Laser triangulation sensor (external verification system)"
 bash ecmcReport.bash $REPORT ""
 bash ecmcReport.bash $REPORT "## Open loop step counter of stepper"
 bash ecmcReport.bash $REPORT "The stepper motors was run in open loop during all the tests. The openloop step counter"
@@ -109,7 +111,7 @@ bash ecmcReport.bash $REPORT "1. Scale factor  : 1"
 bash ecmcReport.bash $REPORT "2. Offset factor : ${RESOLVER_OFFSET}mm"
 bash ecmcReport.bash $REPORT ""
 bash ecmcReport.bash $REPORT "## External verification system"
-bash ecmcReport.bash $REPORT "A Micro-Epsilon ILD2300 sensor is used as external verification system:"
+bash ecmcReport.bash $REPORT "Micro-Epsilon ILD2300 sensor:"
 bash ecmcReport.bash $REPORT "* Type          : Laser triangulation"
 bash ecmcReport.bash $REPORT "* Range         : 50mm (mounted to cover the center of the slitset stroke)"
 bash ecmcReport.bash $REPORT ""
@@ -135,52 +137,106 @@ DATAPV="IOC_TEST:Axis1-PosAct"
 DATACOUNT="350"  # Must be enough to capture the switch transition
 SWITCHPV="IOC_TEST:ec0-s2-EL1808-BI1"
 SWITCHVAL=0
+OPENLOOPVALS=""
+RESOLVERVALS=""
 # Engage
 for TRIGGVAL in {2001..2010}
 do
    DATAPV="IOC_TEST:Axis1-PosAct"
    OPENLOOPVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
+   OPENLOOPVALS+="$OPENLOOPVAL "
    DATAPV="IOC_TEST:ec0-s4-EL7211-Enc-PosAct"
    RESOLVERVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
    RESOLVERVAL=$(echo $RESOLVERVAL | bash ecmcScaleOffsetData.bash 1 ${RESOLVER_OFFSET})
+   RESOLVERVALS+="$RESOLVERVAL "
    echo "BWD switch engage position $TRIGGVAL: $OPENLOOPVAL, $RESOLVERVAL"
 done
+# Calc avg and std
+OPENLOOPAVG=$(echo "$OPENLOOPVALS" | bash ecmcAvgDataRow.bash)
+OPENLOOPSTD=$(echo "$OPENLOOPVALS" | bash ecmcStdDataRow.bash)
+echo "Openloop AVG=$OPENLOOPAVG, STD=$OPENLOOPSTD" 
+RESOLVERAVG=$(echo "$RESOLVERVALS" | bash ecmcAvgDataRow.bash)
+RESOLVERSTD=$(echo "$RESOLVERVALS" | bash ecmcStdDataRow.bash)
+echo "Resolver AVG=$RESOLVERAVG, STD=$RESOLVERSTD"
+
 # Disengage
 SWITCHVAL=1
+OPENLOOPVALS=""
+RESOLVERVALS=""
+OPENLOOPAVG=""
+RESOLVERAVG=""
 for TRIGGVAL in {2011..2020}
 do
    DATAPV="IOC_TEST:Axis1-PosAct"
    OPENLOOPVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
+   OPENLOOPVALS+="$OPENLOOPVAL "
    DATAPV="IOC_TEST:ec0-s4-EL7211-Enc-PosAct"
    RESOLVERVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
    RESOLVERVAL=$(echo $RESOLVERVAL | bash ecmcScaleOffsetData.bash 1 ${RESOLVER_OFFSET})
+   RESOLVERVALS+="$RESOLVERVAL "
    echo "BWD switch disengage position $TRIGGVAL: $OPENLOOPVAL, $RESOLVERVAL"
 done
+
+# Calc avg and std
+OPENLOOPAVG=$(echo "$OPENLOOPVALS" | bash ecmcAvgDataRow.bash)
+OPENLOOPSTD=$(echo "$OPENLOOPVALS" | bash ecmcStdDataRow.bash)
+echo "Openloop AVG=$OPENLOOPAVG, STD=$OPENLOOPSTD" 
+RESOLVERAVG=$(echo "$RESOLVERVALS" | bash ecmcAvgDataRow.bash)
+RESOLVERSTD=$(echo "$RESOLVERVALS" | bash ecmcStdDataRow.bash)
+echo "Resolver AVG=$RESOLVERAVG, STD=$RESOLVERSTD"
 
 ############ HIGH LIMIT SWITCH
 SWITCHPV="IOC_TEST:ec0-s2-EL1808-BI2"
 SWITCHVAL=0
+RESOLVERVALS=""
+OPENLOOPVALS=""
+OPENLOOPAVG=""
+RESOLVERAVG=""
 # Engage
 for TRIGGVAL in {4001..4010}
 do
    DATAPV="IOC_TEST:Axis1-PosAct"
    OPENLOOPVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
+   OPENLOOPVALS+="$OPENLOOPVAL "
    DATAPV="IOC_TEST:ec0-s4-EL7211-Enc-PosAct"
    RESOLVERVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
    RESOLVERVAL=$(echo $RESOLVERVAL | bash ecmcScaleOffsetData.bash 1 ${RESOLVER_OFFSET})
+   RESOLVERVALS+="$RESOLVERVAL "
    echo "FWD switch engage position $TRIGGVAL: $OPENLOOPVAL, $RESOLVERVAL"
 done
+
+# Calc avg and std
+OPENLOOPAVG=$(echo "$OPENLOOPVALS" | bash ecmcAvgDataRow.bash)
+OPENLOOPSTD=$(echo "$OPENLOOPVALS" | bash ecmcStdDataRow.bash)
+echo "Openloop AVG=$OPENLOOPAVG, STD=$OPENLOOPSTD" 
+RESOLVERAVG=$(echo "$RESOLVERVALS" | bash ecmcAvgDataRow.bash)
+RESOLVERSTD=$(echo "$RESOLVERVALS" | bash ecmcStdDataRow.bash)
+echo "Resolver AVG=$RESOLVERAVG, STD=$RESOLVERSTD"
+
 # Disengage
 SWITCHVAL=1
+RESOLVERVALS=""
+OPENLOOPVALS=""
+OPENLOOPAVG=""
+RESOLVERAVG=""
 for TRIGGVAL in {4011..4020}
 do
    DATAPV="IOC_TEST:Axis1-PosAct"
    OPENLOOPVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
+   OPENLOOPVALS+="$OPENLOOPVAL "
    DATAPV="IOC_TEST:ec0-s4-EL7211-Enc-PosAct"
    RESOLVERVAL=$(bash ecmcGetSwitchPosValue.bash $FILE $TRIGGPV $TRIGGVAL $DATAPV $DATACOUNT $SWITCHPV $SWITCHVAL)
    RESOLVERVAL=$(echo $RESOLVERVAL | bash ecmcScaleOffsetData.bash 1 ${RESOLVER_OFFSET})
+   RESOLVERVALS+="$RESOLVERVAL "
    echo "FWD switch disengage position $TRIGGVAL: $OPENLOOPVAL, $RESOLVERVAL"
 done
 
+# Calc avg and std
+OPENLOOPAVG=$(echo "$OPENLOOPVALS" | bash ecmcAvgDataRow.bash)
+OPENLOOPSTD=$(echo "$OPENLOOPVALS" | bash ecmcStdDataRow.bash)
+echo "Openloop AVG=$OPENLOOPAVG, STD=$OPENLOOPSTD" 
+RESOLVERAVG=$(echo "$RESOLVERVALS" | bash ecmcAvgDataRow.bash)
+RESOLVERSTD=$(echo "$RESOLVERVALS" | bash ecmcStdDataRow.bash)
+echo "Resolver AVG=$RESOLVERAVG, STD=$RESOLVERSTD"
 
 # Add stddev
