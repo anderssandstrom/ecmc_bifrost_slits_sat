@@ -27,12 +27,12 @@ Test | Check| Verified|
 ## First test run
 
 
-1. Very minot scratching/grinding sound
+1. Very minor scratching/grinding sound
 2. Limits very close to mech stops. Readjusted upper to get some more margin
 3. Use Velocity of 0.75mm/s for tests
 4. Use same current as JJXRay
 
-
+Test whent fine. 
 
 ## Data logging:
 ```
