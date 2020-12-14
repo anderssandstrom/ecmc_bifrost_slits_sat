@@ -351,3 +351,8 @@ python ecmcTestRepeatability.py IOC_TEST:Axis1 IOC_TEST:TestNumber 15.5 15 0.5 3
 camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TEST:ec0-s5-OptoILD2300_50mm-AI1 IOC_TEST:TestNumber | tee axis1_repeat_pos15_above.log
 cat axis1_repeat_pos15_above.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
 ```
+
+
+High noise on axis 1
+
+Noise also on axis 2 but not as much.
