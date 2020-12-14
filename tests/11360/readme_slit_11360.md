@@ -47,3 +47,6 @@ The limit switches are positioned VERY close to mechanical stop (especially the 
 # Stroke Axis 2
 
 
+
+
+Both axis wrong pinout of lemo. So skip test..
