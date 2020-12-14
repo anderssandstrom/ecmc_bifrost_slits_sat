@@ -1,8 +1,8 @@
 # ecmc motion system test report
 
 * Data file   : axis2_data.log
-* Date        : Sun Dec 13 20:09:11 CET 2020
-* Author      : anderssandstrom
+* Date        : Mon Dec 14 10:22:11 CET 2020
+* Author      : dev
 
 # Sensor calibration
 Test were performed with three position feedback systems:
@@ -18,7 +18,7 @@ reflects the actual position of the ecmc contolsystem.
 ## Resolver:
 Conversion data (to open loop coord syst):
 1. Scale factor : 1
-2. Offset factor : 12.2027mm
+2. Offset factor : 63.1937mm
 
 ## External verification system
 Micro-Epsilon ILD2300 sensor:
@@ -27,21 +27,21 @@ Micro-Epsilon ILD2300 sensor:
 
 Conversion data (to open loop coord syst):
 1. Scale factor : -1 (measure from top)
-2. Offset factor : 60.4885mm
+2. Offset factor : 60.4704mm
 
 # Limit Switch Performance
 ## Low Limit Engage Position
 Test | Openloop [mm]| Resolver [mm]|
 --- | --- | --- |
-1 | -0.4573 | -0.4525
-2 | -0.4572 | -0.4525
-3 | -0.4505 | -0.4464
-4 | -0.4505 | -0.4464
-5 | -0.4497 | -0.4457
-6 | -0.4588 | -0.4540
-7 | -0.4580 | -0.4533
-8 | -0.4521 | -0.4478
-9 | -0.4527 | -0.4485
-10 | -0.4595 | -0.4547
-AVG | -0.4546 | -0.4502
-STD | 0.0037 | 0.0034
+1 | -0.4423 | -0.4434
+2 | -0.4507 | -0.4498
+3 | -0.4775 | -0.4751
+4 | -0.4708 | -0.4681
+5 | -0.4798 | -0.4777
+6 | -0.4618 | -0.4593
+7 | -0.4685 | -0.4660
+8 | -0.4588 | -0.4568
+9 | -0.4543 | -0.4527
+10 | -0.4813 | -0.4792
+AVG | -0.4646 | -0.4628
+STD | 0.0125 | 0.0117
