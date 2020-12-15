@@ -1,10 +1,10 @@
 # ecmc motion system test report
 
 * Data file   : ../../ecmc_bifrost_slits_sat/tests/11358/axis1/axis1_data.log
-* Date        : Tue Dec 15 11:04:27 CET 2020
+* Date        : Tue Dec 15 11:56:38 CET 2020
 * Author      : anderssandstrom
 
-# Sensor calibration
+# Sensors
 
 ## Open loop step counter of stepper
 
@@ -16,14 +16,14 @@ reflects the actual position of the contolsystem.
 Conversion data (to open loop coord syst):
 
 1. Scale factor : 1
-2. Offset factor : 83.1304mm
+2. Offset : 83.1304mm
 
 ## External verification system, Micro-Epsilon ILD2300 sensor
 
 Conversion data (to open loop coord syst):
 
 1. Scale factor : -1 (measure from top)
-2. Offset factor : 59.5035mm
+2. Offset : 59.5035mm
 
 # Limit Switch Performance
 
@@ -199,49 +199,50 @@ Measured at 8 positions offset by 45deg resolver shaft angle. The distrubution v
 
 Test | Setpoint [mm] | Resolver AVG[mm] | Resolver STD[mm]
 --- | --- | --- | --- |
-1 | 36.12422 | 36.10490 | 0.00001
-2 | 36.24922 | 36.25010 | 0.00001
-3 | 36.37422 | 36.35520 | 0.00002
-4 | 36.49922 | 36.50030 | 0.00001
-5 | 36.62422 | 36.60490 | 0.00001
-6 | 36.74922 | 36.75040 | 0.00001
-7 | 36.87422 | 36.85520 | 0.00002
-8 | 36.99922 | 37.00020 | 0.00001
+1 | 36.12422 | 36.1049000 | 0.0000131
+2 | 36.24922 | 36.2501000 | 0.0000150
+3 | 36.37422 | 36.3552000 | 0.0000189
+4 | 36.49922 | 36.5003000 | 0.0000089
+5 | 36.62422 | 36.6049000 | 0.0000121
+6 | 36.74922 | 36.7504000 | 0.0000150
+7 | 36.87422 | 36.8552000 | 0.0000182
+8 | 36.99922 | 37.0002000 | 0.0000144
 
-## Accuracy based on resolver and ILD2300 sensor
-
-Measured at 12 positions offset by 5mm over the entire actuator stroke.
-
-Test | Setpoint [mm] | Resolver [mm] | ILD2300 [mm]
---- | --- | --- | --- |
-1 | 5.0000 | 5.0005 | Out of range
-2 | 10.0000 | 10.0005 | 10.0064
-3 | 15.0000 | 15.0005 | 14.9991
-4 | 20.0000 | 20.0006 | 20.0036
-5 | 25.0000 | 25.0006 | 25.0299
-6 | 30.0000 | 30.0007 | 30.0086
-7 | 35.0000 | 35.0007 | 34.9674
-8 | 40.0000 | 40.0009 | 39.9680
-9 | 45.0000 | 45.0009 | 44.9642
-10 | 50.0000 | 50.0009 | 49.9732
-11 | 55.0000 | 55.0010 | 54.9696
-12 | 60.0000 | 60.0010 | 59.9578
-
-## Accuracy based on resolver and ILD2300 sensor
+## Accuracy based on Resolver and ILD2300 sensor Positive Direction
 
 Measured at 12 positions offset by 5mm over the entire actuator stroke.
 
-Test | Setpoint [mm] | Resolver [mm] | ILD2300 [mm]
---- | --- | --- | --- |
-1 | 60.0000 | 60.0003 | 59.9680
-2 | 55.0000 | 55.0002 | 54.9790
-3 | 50.0000 | 50.0001 | 49.9749
-4 | 45.0000 | 45.0003 | 44.9638
-5 | 40.0000 | 40.0000 | 39.9738
-6 | 35.0000 | 35.0002 | 34.9733
-7 | 30.0000 | 30.0001 | 30.0090
-8 | 25.0000 | 25.0001 | 25.0330
-9 | 20.0000 | 20.0003 | 19.9973
-10 | 15.0000 | 14.9999 | 15.0009
-11 | 10.0000 | 10.0002 | 10.0007
-12 | 5.0000 | 4.9998 | Out of range
+Test | Setpoint [mm] | Resolver [mm] | Diff [mm] | ILD2300 [mm] | Diff [mm]
+--- | --- | --- | --- | --- | --- |
+1 | 5.0000 | 5.0005 | 0.0005 | Out of range | NaN
+2 | 10.0000 | 10.0005 | 0.0005 | 10.0064 | 0.0064
+3 | 15.0000 | 15.0005 | 0.0005 | 14.9991 | -0.0009
+4 | 20.0000 | 20.0006 | 0.0006 | 20.0036 | 0.0036
+5 | 25.0000 | 25.0006 | 0.0006 | 25.0299 | 0.0299
+6 | 30.0000 | 30.0007 | 0.0007 | 30.0086 | 0.0086
+7 | 35.0000 | 35.0007 | 0.0007 | 34.9674 | -0.0326
+8 | 40.0000 | 40.0009 | 0.0009 | 39.9680 | -0.0320
+9 | 45.0000 | 45.0009 | 0.0009 | 44.9642 | -0.0358
+10 | 50.0000 | 50.0009 | 0.0009 | 49.9732 | -0.0268
+11 | 55.0000 | 55.0010 | 0.0010 | 54.9696 | -0.0304
+12 | 60.0000 | 60.0010 | 0.0010 | 59.9578 | -0.0422
+
+## Accuracy based on Resolver and ILD2300 sensor Negative Direction
+
+Measured at 12 positions offset by 5mm over the entire actuator stroke.
+
+Test | Setpoint [mm] | Resolver [mm] | Diff [mm] | ILD2300 [mm] | Diff [mm]
+--- | --- | --- | --- | --- | --- |
+1 | 5.0000 | 4.9998 | -0.0002 | Out of range | NaN
+2 | 10.0000 | 10.0002 | 0.0002 | 10.0007 | 0.0007
+3 | 15.0000 | 14.9999 | -0.0001 | 15.0009 | 0.0009
+4 | 20.0000 | 20.0003 | 0.0003 | 19.9973 | -0.0027
+5 | 25.0000 | 25.0001 | 0.0001 | 25.0330 | 0.0330
+6 | 30.0000 | 30.0001 | 0.0001 | 30.0090 | 0.0090
+7 | 35.0000 | 35.0002 | 0.0002 | 34.9733 | -0.0267
+8 | 40.0000 | 40.0000 | 0.0000 | 39.9738 | -0.0262
+9 | 45.0000 | 45.0003 | 0.0003 | 44.9638 | -0.0362
+10 | 50.0000 | 50.0001 | 0.0001 | 49.9749 | -0.0251
+11 | 55.0000 | 55.0002 | 0.0002 | 54.9790 | -0.0210
+12 | 60.0000 | 60.0003 | 0.0003 | 59.9680 | -0.0320
+
