@@ -1,7 +1,7 @@
 # ecmc motion system test report
 
 * Data file   : ../../ecmc_bifrost_slits_sat/tests/11358/axis1/axis1_data.log
-* Date        : Tue Dec 15 10:32:22 CET 2020
+* Date        : Tue Dec 15 11:04:27 CET 2020
 * Author      : anderssandstrom
 
 # Sensor calibration
@@ -114,7 +114,7 @@ Test | Resolver Pos [mm] | Resolver Neg [mm] | Diff [mm]
 AVG | 15.0005 | 14.9997 | 0.0008
 STD | 0.0000 | 0.0000 | -0.0000
 
-Test | Opto Pos [mm] | Opto Neg [mm] | Diff [mm]
+Test | ILD2300 Pos [mm] | ILD2300 Neg [mm] | Diff [mm]
 --- | --- | --- | --- |
 1 | 15.0423 | 15.0352 | 0.0071
 2 | 15.0407 | 15.0352 | 0.0055
@@ -146,7 +146,7 @@ Test | Resolver Pos [mm] | Resolver Neg [mm] | Diff [mm]
 AVG | 35.0008 | 34.9998 | 0.0010
 STD | 0.0000 | 0.0000 | 0.0000
 
-Test | Opto Pos [mm] | Opto Neg [mm] | Diff [mm]
+Test | ILD2300 Pos [mm] | ILD2300 Neg [mm] | Diff [mm]
 --- | --- | --- | --- |
 1 | 35.0019 | 34.9976 | 0.0043
 2 | 35.0025 | 34.9968 | 0.0057
@@ -178,7 +178,7 @@ Test | Resolver Pos [mm] | Resolver Neg [mm] | Diff [mm]
 AVG | 55.0010 | 55.0000 | 0.0010
 STD | 0.0000 | 0.0000 | -0.0000
 
-Test | Opto Pos [mm] | Opto Neg [mm] | Diff [mm]
+Test | ILD2300 Pos [mm] | ILD2300 Neg [mm] | Diff [mm]
 --- | --- | --- | --- |
 1 | 54.9953 | 54.9910 | 0.0043
 2 | 54.9949 | 54.9910 | 0.0039
@@ -208,11 +208,11 @@ Test | Setpoint [mm] | Resolver AVG[mm] | Resolver STD[mm]
 7 | 36.87422 | 36.85520 | 0.00002
 8 | 36.99922 | 37.00020 | 0.00001
 
-## Accuracy based on resolver and micro epsilon sensor
+## Accuracy based on resolver and ILD2300 sensor
 
 Measured at 12 positions offset by 5mm over the entire actuator stroke.
 
-Test | Setpoint [mm] | Resolver [mm] | Micro Epsilon [mm]
+Test | Setpoint [mm] | Resolver [mm] | ILD2300 [mm]
 --- | --- | --- | --- |
 1 | 5.0000 | 5.0005 | Out of range
 2 | 10.0000 | 10.0005 | 10.0064
@@ -227,11 +227,11 @@ Test | Setpoint [mm] | Resolver [mm] | Micro Epsilon [mm]
 11 | 55.0000 | 55.0010 | 54.9696
 12 | 60.0000 | 60.0010 | 59.9578
 
-## Accuracy based on resolver and micro epsilon sensor
+## Accuracy based on resolver and ILD2300 sensor
 
 Measured at 12 positions offset by 5mm over the entire actuator stroke.
 
-Test | Setpoint [mm] | Resolver [mm] | Micro Epsilon [mm]
+Test | Setpoint [mm] | Resolver [mm] | ILD2300 [mm]
 --- | --- | --- | --- |
 1 | 60.0000 | 60.0003 | 59.9680
 2 | 55.0000 | 55.0002 | 54.9790
