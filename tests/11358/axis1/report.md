@@ -1,7 +1,7 @@
 # ecmc motion system test report
 
-* Data file   : /home/anderssandstrom/ecmc_bifrost_slits_sat/tests/11358/axis1/axis1_data.log
-* Date        : Mon Dec 14 22:04:33 CET 2020
+* Data file   : ../../ecmc_bifrost_slits_sat/tests/11358/axis1/axis1_data.log
+* Date        : Tue Dec 15 10:32:22 CET 2020
 * Author      : anderssandstrom
 
 # Sensor calibration
@@ -78,7 +78,7 @@ Test | Openloop [mm]| Resolver [mm]| Diff [mm]
 AVG | 63.7154 | 63.7243 | -0.0089
 STD | 0.0045 | 0.0041 | 0.0004
 
-## Low Limit Disengage Position
+## High Limit Disengage Position
 
 Test | Openloop [mm]| Resolver [mm]| Diff [mm]
 --- | --- | --- |--- |
@@ -128,6 +128,7 @@ Test | Opto Pos [mm] | Opto Neg [mm] | Diff [mm]
 10 | 15.0360 | 15.0323 | 0.0037
 AVG | 15.0388 | 15.0336 | 0.0052
 STD | 0.0018 | 0.0011 | 0.0007
+
 ## Target Position 35 Positive and Negative Direction
 
 Test | Resolver Pos [mm] | Resolver Neg [mm] | Diff [mm]
@@ -159,6 +160,7 @@ Test | Opto Pos [mm] | Opto Neg [mm] | Diff [mm]
 10 | 35.0000 | 34.9986 | 0.0014
 AVG | 35.0008 | 34.9975 | 0.0033
 STD | 0.0010 | 0.0007 | 0.0003
+
 ## Target Position 55 Positive and Negative Direction
 
 Test | Resolver Pos [mm] | Resolver Neg [mm] | Diff [mm]
@@ -190,3 +192,56 @@ Test | Opto Pos [mm] | Opto Neg [mm] | Diff [mm]
 10 | 54.9916 | 54.9888 | 0.0029
 AVG | 54.9933 | 54.9900 | 0.0033
 STD | 0.0012 | 0.0008 | 0.0004
+
+## Resolver Value Distribution
+
+Measured at 8 positions offset by 45deg resolver shaft angle. The distrubution values are based on 75 values at each location.
+
+Test | Setpoint [mm] | Resolver AVG[mm] | Resolver STD[mm]
+--- | --- | --- | --- |
+1 | 36.12422 | 36.10490 | 0.00001
+2 | 36.24922 | 36.25010 | 0.00001
+3 | 36.37422 | 36.35520 | 0.00002
+4 | 36.49922 | 36.50030 | 0.00001
+5 | 36.62422 | 36.60490 | 0.00001
+6 | 36.74922 | 36.75040 | 0.00001
+7 | 36.87422 | 36.85520 | 0.00002
+8 | 36.99922 | 37.00020 | 0.00001
+
+## Accuracy based on resolver and micro epsilon sensor
+
+Measured at 12 positions offset by 5mm over the entire actuator stroke.
+
+Test | Setpoint [mm] | Resolver [mm] | Micro Epsilon [mm]
+--- | --- | --- | --- |
+1 | 5.0000 | 5.0005 | Out of range
+2 | 10.0000 | 10.0005 | 10.0064
+3 | 15.0000 | 15.0005 | 14.9991
+4 | 20.0000 | 20.0006 | 20.0036
+5 | 25.0000 | 25.0006 | 25.0299
+6 | 30.0000 | 30.0007 | 30.0086
+7 | 35.0000 | 35.0007 | 34.9674
+8 | 40.0000 | 40.0009 | 39.9680
+9 | 45.0000 | 45.0009 | 44.9642
+10 | 50.0000 | 50.0009 | 49.9732
+11 | 55.0000 | 55.0010 | 54.9696
+12 | 60.0000 | 60.0010 | 59.9578
+
+## Accuracy based on resolver and micro epsilon sensor
+
+Measured at 12 positions offset by 5mm over the entire actuator stroke.
+
+Test | Setpoint [mm] | Resolver [mm] | Micro Epsilon [mm]
+--- | --- | --- | --- |
+1 | 60.0000 | 60.0003 | 59.9680
+2 | 55.0000 | 55.0002 | 54.9790
+3 | 50.0000 | 50.0001 | 49.9749
+4 | 45.0000 | 45.0003 | 44.9638
+5 | 40.0000 | 40.0000 | 39.9738
+6 | 35.0000 | 35.0002 | 34.9733
+7 | 30.0000 | 30.0001 | 30.0090
+8 | 25.0000 | 25.0001 | 25.0330
+9 | 20.0000 | 20.0003 | 19.9973
+10 | 15.0000 | 14.9999 | 15.0009
+11 | 10.0000 | 10.0002 | 10.0007
+12 | 5.0000 | 4.9998 | Out of range
