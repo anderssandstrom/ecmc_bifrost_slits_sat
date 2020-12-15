@@ -1,7 +1,7 @@
 # ecmc motion system test report
 
 * Data file   : ../../ecmc_bifrost_slits_sat/tests/11358/axis1/axis1_data.log
-* Date        : Tue Dec 15 20:04:34 CET 2020
+* Date        : Tue Dec 15 20:10:29 CET 2020
 * Author      : anderssandstrom
 
 # Sensors
@@ -119,7 +119,7 @@ AVG | 15.0005 | 14.9997 | 0.0008
 STD | 0.0000 | 0.0000 | -0.0000
 Range | 0.0000 | 0.0001 | 0.0001
 
-Repeatability (Resolver) 0.0008
+Repeatability (Resolver): 0.0008
 
 Test | ILD2300 Pos [mm] | ILD2300 Neg [mm] | Diff [mm]
 --- | --- | --- | --- |
@@ -137,7 +137,7 @@ AVG | 15.0388 | 15.0336 | 0.0052
 STD | 0.0018 | 0.0011 | 0.0007
 Range | 0.0063 | 0.0029 | 0.0035
 
-Repeatability (ILD2300) 0.0071
+Repeatability (ILD2300): 0.0071
 
 ## Target Position 35 Positive and Negative Direction
 
@@ -157,7 +157,7 @@ AVG | 35.0008 | 34.9998 | 0.0010
 STD | 0.0000 | 0.0000 | 0.0000
 Range | 0.0001 | 0.0001 | 0.0001
 
-Repeatability (Resolver) 0.0010
+Repeatability (Resolver): 0.0010
 
 Test | ILD2300 Pos [mm] | ILD2300 Neg [mm] | Diff [mm]
 --- | --- | --- | --- |
@@ -175,7 +175,7 @@ AVG | 35.0008 | 34.9975 | 0.0033
 STD | 0.0010 | 0.0007 | 0.0003
 Range | 0.0031 | 0.0020 | 0.0043
 
-Repeatability (ILD2300) 0.0057
+Repeatability (ILD2300): 0.0057
 
 ## Target Position 55 Positive and Negative Direction
 
@@ -195,7 +195,7 @@ AVG | 55.0010 | 55.0000 | 0.0010
 STD | 0.0000 | 0.0000 | -0.0000
 Range | 0.0000 | 0.0001 | 0.0001
 
-Repeatability (Resolver) 0.0010
+Repeatability (Resolver): 0.0010
 
 Test | ILD2300 Pos [mm] | ILD2300 Neg [mm] | Diff [mm]
 --- | --- | --- | --- |
@@ -213,7 +213,7 @@ AVG | 54.9933 | 54.9900 | 0.0033
 STD | 0.0012 | 0.0008 | 0.0004
 Range | 0.0037 | 0.0022 | 0.0014
 
-Repeatability (ILD2300) 0.0043
+Repeatability (ILD2300): 0.0043
 
 ## Resolver Value Distribution
 
@@ -250,6 +250,9 @@ Test | Setpoint [mm] | Resolver [mm] | Diff [mm] | ILD2300 [mm] | Diff [mm]
 12 | 60.0000 | 60.0010 | 0.0010 | 59.9578 | -0.0422
 Accuracy |-|-| 0.0010 | - | 0.0422
 
+Accuracy (Resolver): 0.0010
+Accuracy (ILD2300): 0.0422
+
 ## Accuracy based on Resolver and ILD2300 Sensor Negative Direction
 
 Measured at 12 positions offset by 5mm over the entire actuator stroke.
@@ -269,4 +272,7 @@ Test | Setpoint [mm] | Resolver [mm] | Diff [mm] | ILD2300 [mm] | Diff [mm]
 11 | 55.0000 | 55.0002 | 0.0002 | 54.9790 | -0.0210
 12 | 60.0000 | 60.0003 | 0.0003 | 59.9680 | -0.0320
 Accuracy |-|-| 0.0003 | - | 0.0362
+
+Accuracy (Resolver): 0.0003
+Accuracy (ILD2300): 0.0362
 
