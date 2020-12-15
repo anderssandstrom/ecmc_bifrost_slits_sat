@@ -1,7 +1,7 @@
 # ecmc motion system test report
 
 * Data file   : ../../ecmc_bifrost_slits_sat/tests/11358/axis1/axis1_data.log
-* Date        : Tue Dec 15 20:10:29 CET 2020
+* Date        : Tue Dec 15 20:14:56 CET 2020
 * Author      : anderssandstrom
 
 # Sensors
@@ -251,6 +251,7 @@ Test | Setpoint [mm] | Resolver [mm] | Diff [mm] | ILD2300 [mm] | Diff [mm]
 Accuracy |-|-| 0.0010 | - | 0.0422
 
 Accuracy (Resolver): 0.0010
+
 Accuracy (ILD2300): 0.0422
 
 ## Accuracy based on Resolver and ILD2300 Sensor Negative Direction
@@ -274,5 +275,6 @@ Test | Setpoint [mm] | Resolver [mm] | Diff [mm] | ILD2300 [mm] | Diff [mm]
 Accuracy |-|-| 0.0003 | - | 0.0362
 
 Accuracy (Resolver): 0.0003
+
 Accuracy (ILD2300): 0.0362
 
