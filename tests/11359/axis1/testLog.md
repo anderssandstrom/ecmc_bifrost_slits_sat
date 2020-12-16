@@ -38,3 +38,12 @@ camonitor -g10 -n IOC_TEST:ec0-s4-EL7211-Enc-PosAct IOC_TEST:Axis1-PosAct IOC_TE
 cat axisx_data.log | python ~/projects/ecmccomgui/pyDataManip/plotCaMonitor.py &
 ```
 
+
+# Problems. Very high value for accuracy 0.2-0.4mm ILD2300 (in foue different tests). 
+last increased current to 900mA
+
+Could it be a coupling not conencted right?
+Seems to move harder than other axis (higher traction, noise..)..
+
+Loosing steps but then resolver should show that also..
+
