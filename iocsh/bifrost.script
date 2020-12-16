@@ -29,6 +29,7 @@ system("ethercat slaves")
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "1")
 epicsEnvSet("ECMC_EC_SLAVE_NUM_DRIVE",         ${ECMC_EC_SLAVE_NUM})
+#${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037, CONFIG=-Motor-AML-D42.3-1.8, CFG_MACROS='I_RUN_MA=900'"
 ${SCRIPTEXEC} ${ecmccfg_DIR}configureSlave.cmd, "SLAVE_ID=$(ECMC_EC_SLAVE_NUM), HW_DESC=EL7037, CONFIG=-Motor-AML-D42.3-1.8"
 
 epicsEnvSet("ECMC_EC_SLAVE_NUM",              "2")
