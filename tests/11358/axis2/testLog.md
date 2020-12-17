@@ -9,7 +9,7 @@
 2. Limits very close to mech stop.
 3. Carriage parked into the lower mech stop (no air between).
 4. Maybe coupling not tightened.
-5. Upper limit switch lever looks like it has been bent. 
+5. Upper and lower limit switch lever looks like it has been bent. 
 
 ### Electrical
 Check electrical connections.

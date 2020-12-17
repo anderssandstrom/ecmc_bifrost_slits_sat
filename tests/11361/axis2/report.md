@@ -1,8 +1,8 @@
 # ecmc motion system test report
 
 * Data file   : ../../ecmc_bifrost_slits_sat/tests/11361/axis2/axis2_data.log
-* Date        : Tue Dec 15 20:34:26 CET 2020
-* Author      : anderssandstrom
+* Date        : Thu Dec 17 14:17:25 CET 2020
+* Author      : dev
 
 # Sensors
 
@@ -219,16 +219,19 @@ Repeatability (ILD2300): 0.0033
 
 Measured at 8 positions offset by 45deg resolver shaft angle. The distrubution values are based on 75 values at each location.
 
-Test | Setpoint [mm] | Resolver AVG[mm] | Resolver STD[mm]
---- | --- | --- | --- |
-1 | 36.12422 | 36.1531000 | 0.0000223
-2 | 36.24922 | 36.2507000 | 0.0000128
-3 | 36.37422 | 36.4035000 | 0.0000183
-4 | 36.49922 | 36.5003000 | 0.0000159
-5 | 36.62422 | 36.6529000 | 0.0000161
-6 | 36.74922 | 36.7508000 | 0.0000134
-7 | 36.87422 | 36.9038000 | 0.0000203
-8 | 36.99922 | 37.0003000 | 0.0000157
+Test | Setpoint [mm] | Resolver AVG[mm] | Diff [mm} | Resolver STD[mm]
+--- | --- | --- | --- | --- |
+1 | 36.12422 | 36.1531000 | 0.0288813 | 0.0000223
+2 | 36.24922 | 36.2507000 | 0.0014813 | 0.0000128
+3 | 36.37422 | 36.4035000 | 0.0292812 | 0.0000183
+4 | 36.49922 | 36.5003000 | 0.0010813 | 0.0000159
+5 | 36.62422 | 36.6529000 | 0.0286812 | 0.0000161
+6 | 36.74922 | 36.7508000 | 0.0015812 | 0.0000134
+7 | 36.87422 | 36.9038000 | 0.0295813 | 0.0000203
+8 | 36.99922 | 37.0003000 | 0.0010813 | 0.0000157
+
+Accuracy standstill (Resolver): 0.0295812
+
 
 ## Accuracy based on Resolver and ILD2300 Sensor Positive Direction
 
